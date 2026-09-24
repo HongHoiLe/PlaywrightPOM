@@ -20,7 +20,10 @@ test('has title', async ({ page }) => {
   await expect(page).toHaveTitle(/Automation Exercise/);
 
   await homePage.clickLoginSignUpBtn();
+  await homePage.expectText("New User Signup!");
 
+
+  // register page
   await registerPage.enterUserId("abc");
   await registerPage.enterEmail("abcd@auto.com");
 

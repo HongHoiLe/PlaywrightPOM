@@ -4,27 +4,17 @@ import { BasePage } from './BasePage';
 export class RegisterPage extends BasePage {
     readonly url = 'https://automationexercise.com/';
 
-    // Locators
-    //   readonly getStartedLink: Locator;
-    //   readonly installationHeading: Locator;
+    // Locators 
 
     constructor(page: Page) {
     super(page);
-    // this.getStartedLink = page.getByRole('link', { name: 'Get started' });
-    // this.installationHeading = page.getByRole('heading', { name: 'Installation' });
-
-
-
+ 
     }
 
     async goto(): Promise<void> {
         await this.navigate(this.url);
     }
-
-
-
-
-
+ 
     async enterUserId(keyword: string): Promise<void> {
         await this.page.locator("//input[@placeholder='Name']").fill(keyword);
     }
@@ -56,8 +46,7 @@ export class RegisterPage extends BasePage {
     async clickchkOptin(): Promise<void> {
         await this.page.locator("//input[@id='optin']").click();
     }
-
-    
+ 
     async enterAddressInformation(firstName: string, lastName: string,
         company: string, address1: string, address2: string,
         country: string, state: string, city: string, zipCode: string, phoneNumber: string
@@ -73,14 +62,11 @@ export class RegisterPage extends BasePage {
         await this.page.locator("//input[@id='zipcode']").fill(zipCode);
         await this.page.locator("//input[@id='mobile_number']").fill(phoneNumber);
     }
-
-
-
+ 
     async clickCreateAccountBtn(): Promise<void> {
         await this.page.locator("//button[@type='submit' and text()='Create Account']").click();
     }
-
-    
+ 
     async clickContinueBtn(): Promise<void> {
         await this.page.locator("//a[@class='btn btn-primary' and text()='Continue']").click();
     }
@@ -95,3 +81,6 @@ export class RegisterPage extends BasePage {
     //   await expect(this.installationHeading).toBeVisible();
     // }
 }
+
+    // this.getStartedLink = page.getByRole('link', { name: 'Get started' });
+    // this.installationHeading = page.getByRole('heading', { name: 'Installation' });
