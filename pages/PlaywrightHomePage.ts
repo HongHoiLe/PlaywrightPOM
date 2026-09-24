@@ -20,6 +20,7 @@ export class PlaywrightHomePage extends BasePage {
 
   async clickGetStarted(): Promise<void> {
     await this.getStartedLink.click();
+    // await this.page.locator("//input [@name = 'Login']").fill('abc');
   }
 
   async expectTitleToContainPlaywright(): Promise<void> {
