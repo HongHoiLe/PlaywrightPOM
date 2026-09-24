@@ -29,6 +29,7 @@ test('has title', async ({ page }) => {
 
   await registerPage.clickSubmitBtn();
 
+  // Fill in account info
   await registerPage.clickRdoGenderMale();
   await registerPage.enterPassword("password");
   await registerPage.selectValueDay("10","12","2005");
