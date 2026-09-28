@@ -25,7 +25,7 @@ test('has title', async ({ page }) => {
 
   // register page
   await registerPage.enterUserId("abc");
-  await registerPage.enterEmail("abcd@auto.com");
+  await registerPage.enterEmail("abcd2@auto.com"); // create random string
 
   await registerPage.clickSubmitBtn();
 
@@ -39,8 +39,7 @@ test('has title', async ({ page }) => {
     "Khoa", "Nguyen", "ABC Company", "123 Street", "Apartment 2",
     "Canada", "Ontario", "Toronto", "12345", "0123456789");
 
-  await registerPage.clickCreateAccountBtn();
-
+  await registerPage.clickCreateAccountBtn(); 
   await registerPage.clickContinueBtn();
 
 
