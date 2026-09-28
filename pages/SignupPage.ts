@@ -4,12 +4,14 @@ import { BasePage } from './BasePage';
 export class SignupPage extends BasePage {
 
     // Locators
+    readonly accountInforText: Locator;
     readonly genderRadiobtn: Locator;
     readonly passwordField: Locator;
     readonly dayDropdown: Locator;
     readonly monthDropdown: Locator;
     readonly yearDropdown: Locator;
     readonly newsletterCheckbox: Locator;
+    readonly specialOffersCheckbox: Locator;
     readonly firstNameField: Locator;
     readonly lastNameField: Locator;
     readonly companyField: Locator;
@@ -42,8 +44,12 @@ export class SignupPage extends BasePage {
         this.zipcodeField = page.locator ("//input [@id ='zipcode']");
         this.mobileNumberField = page.locator ("//input [@id ='mobile_number']");
         this.createAccountbtn = page.locator ("//button [text() = 'Create Account']");
-        
+        this.accountInforText = page.locator ("//b [text()= 'Enter Account Information']");
+        this.specialOffersCheckbox = page.locator ("//input [@name= 'optin']");
+    }
 
+    async expectAccountInforTextVisible(): Promise <void> {
+        await expect(this.accountInforText).toBeVisible();
     }
 
     async clickGenderRadiobtn () : Promise <void> {
@@ -69,8 +75,11 @@ export class SignupPage extends BasePage {
     }
 
     async clickNewsletterCheckbox () : Promise <void> {
-        // select theo value
         await this.newsletterCheckbox.click();
+    }
+
+    async clickSpecialOffersCheckbox () : Promise <void> {
+        await this.specialOffersCheckbox.click();
     }
 
     async fillFirstNameField (firstName: string) : Promise <void> {

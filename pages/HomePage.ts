@@ -13,6 +13,8 @@ export class HomePage extends BasePage {
   readonly continueShoppingbtn: Locator;
   readonly viewCartbtn: Locator;
   readonly loginSuccesstxt: Locator;
+  readonly signupLoginbtn: Locator;
+  readonly deleteAccountBtn: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -24,7 +26,8 @@ export class HomePage extends BasePage {
     this.continueShoppingbtn = page.locator ("//div [@class = 'modal-footer'] //button [text()='Continue Shopping']");
     this.viewCartbtn = page.locator ("//ul [@class = 'nav navbar-nav'] //a [@href = '/view_cart']");
     this.loginSuccesstxt = page.locator ("//a[contains(text(), 'Logged in as')]");
-
+    this.signupLoginbtn = page.locator ("//a [@href = '/login']");
+    this.deleteAccountBtn = page.locator ("//a [@href= '/delete_account']");
 }
 
   async goto(): Promise<void> {
@@ -59,5 +62,11 @@ export class HomePage extends BasePage {
     return await this.firstProduct.innerText();
   }
 
+  async clickSignupLoginbtn(): Promise <void> {
+    await this.signupLoginbtn.click();
+  }
 
+  async clickDeleteAccountbtn(): Promise <void> {
+    await this.deleteAccountBtn.click();
+  }
 }
