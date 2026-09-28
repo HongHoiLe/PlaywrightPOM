@@ -44,7 +44,7 @@ export class SignupPage extends BasePage {
         this.zipcodeField = page.locator ("//input [@id ='zipcode']");
         this.mobileNumberField = page.locator ("//input [@id ='mobile_number']");
         this.createAccountbtn = page.locator ("//button [text() = 'Create Account']");
-        this.accountInforText = page.locator ("//b [text()= 'Enter Account Information']");
+        this.accountInforText = page.locator ("//h2 [@class = 'title text-center']//b [contains (text(), 'Account Information')]");
         this.specialOffersCheckbox = page.locator ("//input [@name= 'optin']");
     }
 
@@ -103,6 +103,7 @@ export class SignupPage extends BasePage {
     }
 
     async selectCountry (country: string) : Promise <void> {
+        await this.countryDropdown.scrollIntoViewIfNeeded();
         await this.countryDropdown.selectOption(country);
     }
 

@@ -34,7 +34,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Test case 14', () => {
-    test.only('Test case 14: Place Order: Register while Checkout', async () => {
+    test('Test case 14: Place Order: Register while Checkout', async () => {
         
         //Signup Detail
         const name = 'Vu Duc Dang';
@@ -48,7 +48,7 @@ test.describe('Test case 14', () => {
         const company = 'SmartOSC';
         const address1 = 'abc';
         const address2 = 'xyz';
-        const country = 'United State';
+        const country = 'United States';
         const state = 'Floria';
         const city = 'Miami';
         const zipcode = '111111';
