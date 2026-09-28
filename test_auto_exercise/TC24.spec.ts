@@ -5,6 +5,7 @@ import { ProductPage } from '../pages';
 import { ProductPageDetail } from '../pages';
 import { CartPage } from '../pages';
 import { CheckoutPage } from '../pages';
+import fs from 'fs';
 
 let homePage: HomePage;
 let registerPage: RegisterPage;
@@ -135,12 +136,25 @@ test('TC24: Place Order: Register while Checkout', async ({ page }) => {
   });    
 
   await test.step("19. Click 'Download Invoice' button and verify invoice is downloaded successfully.", async () => {
+    await page.pause()
     await checkoutPage.clickBtnDownInvoice();
-  }); 
+  });
 
   await test.step("20. Click 'Continue' button", async () => {
+    
+    const downloadPromise = page.waitForEvent('download');
+
     await checkoutPage.clickBtnContinueAfterInvoice();
-  });    
+
+    const download = await downloadPromise;
+
+    expect(download.suggestedFilename()).toBe('report.pdf');
+
+    const filePath = 'downloads/report.pdf';
+    await download.saveAs(filePath);
+
+    expect(fs.existsSync(filePath)).toBeTruthy();
+  });
 
   await test.step("21. Click 'Delete Account' button", async () => {
     await homePage.clickDelBtn();
