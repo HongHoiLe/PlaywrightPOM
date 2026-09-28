@@ -64,7 +64,7 @@ export class CheckoutPage extends BasePage {
   await expect(this.deliveryAddress1).toHaveText('So 9 Pham Van Dong');
   await expect(this.deliveryAddress2).toHaveText('Ha Noi');
   await expect(this.deliveryCityStateZipcode).toHaveText('Ha Noi Cau Giay 032154')
-  await expect(this.deliveryCountry).toHaveText('India');
+  await expect(this.deliveryCountry).toHaveText('Canada');
   await expect(this.deliveryPhone).toHaveText('03214587547')
     //Your billing address
   await expect(this.billingName).toContainText('Hieu Vuong Minh');
@@ -72,7 +72,7 @@ export class CheckoutPage extends BasePage {
   await expect(this.billingAddress1).toHaveText('So 9 Pham Van Dong');
   await expect(this.billingAddress2).toHaveText('Ha Noi');
   await expect(this.billingCityStateZipcode).toHaveText('Ha Noi Cau Giay 032154')
-  await expect(this.billingCountry).toHaveText('India');
+  await expect(this.billingCountry).toHaveText('Canada');
   await expect(this.billingPhone).toHaveText('03214587547')
 };
     //Review Your Order

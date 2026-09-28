@@ -27,7 +27,7 @@ test.beforeEach(async ({ page }) => {
 
 
 test.describe('TC14', () => {
-  test('Place Order: Register while Checkout', async () => {
+  test.only('Place Order: Register while Checkout', async () => {
     await test.step('Step 3 - Verify that home page is visible successfully', async () => {
       await goHomePage.expectHomePageVisible();
     });
@@ -105,11 +105,18 @@ test.describe('TC14', () => {
   await test.step('Step 18 - verify payment done', async () =>{
     await paymentPage.verifyPaymentdone();
 });
-await test.step('Step 19 - Click Delete Account button', async () => {
+await test.step('Step 19 - Click Download Invoice button and verify invoice is downloaded successfully.', async () =>{
+    await paymentPage.clickDownloadInvoiceButton();
+});
+await test.step('Step 20 - Click Download Invoice button and verify invoice is downloaded successfully.', async () =>{
+    await paymentPage.clickContinueButton();
+});
+
+await test.step('Step 21 - Click Delete Account button', async () => {
     await goHomePage.clickDeleteAccountButton();
   });
 
-  await test.step('Step 20 - Verify that ACCOUNT DELETED! is visible and click Continue button', async () => {
+  await test.step('Step 22 - Verify that ACCOUNT DELETED! is visible and click Continue button', async () => {
     await accountDeletedPage.expectxtAccountDeletedVisible();
     await accountDeletedPage.clickCoutinueButton();
   });

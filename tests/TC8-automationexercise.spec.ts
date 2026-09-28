@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
 
 
 test.describe('TC8', () => {
-  test.only('Verify All Products and product detail page', async () => {
+  test('Verify All Products and product detail page', async () => {
     await test.step('Step 3 - Verify that home page is visible successfully', async () => {
       await goHomePage.expectHomePageVisible();
     });

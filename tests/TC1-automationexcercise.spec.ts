@@ -21,7 +21,7 @@ test.beforeEach(async ({ page }) => {
 
 
 test.describe('TC1', () => {
-  test.only('Register user successfully', async () => {
+  test('Register user successfully', async () => {
     await test.step('Step 3 - Verify that home page is visible successfully', async () => {
       await goHomePage.expectHomePageVisible();
     });
