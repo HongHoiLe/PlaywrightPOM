@@ -15,11 +15,14 @@ export class CheckoutPage extends BasePage {
   readonly btnPaySumbmit: Locator;
   readonly btnDownInvoice: Locator;
   readonly btnContinue: Locator;
+  readonly btnContinueAfterInvoice: Locator;
+
 
   readonly textAddName: Locator;
   readonly textAddName2: Locator;
   readonly textCountry: Locator;
   readonly textPhone: Locator;
+  readonly txtOrderConfirm: Locator;
  
 
   constructor(page: Page) {
@@ -40,6 +43,11 @@ export class CheckoutPage extends BasePage {
     this.textAddName2 = page.locator("//ul[@class='address item box']//li[@class='address_address1 address_address2'][2]");
     this.textCountry = page.locator("//ul[@class='address item box']//li[@class='address_country_name']");
     this.textPhone = page.locator("//ul[@class='address item box']//li[@class='address_phone']");
+
+    this.btnDownInvoice = page.locator("//a[@href='/download_invoice/500']");  
+    this.btnContinueAfterInvoice = page.locator("//a[@class='btn btn-primary' and text()='Continue']");  
+    this.txtOrderConfirm = page.locator("//div[@class='col-sm-9 col-sm-offset-1']/p");  
+     
   } 
 
 
@@ -50,20 +58,26 @@ export class CheckoutPage extends BasePage {
   // Button
   async enterTxtDescriptionComment(keyword: string): Promise<void> { 
     //await this.txtDescriptionComment.waitFor({ state: 'visible' }); 
-    console.log("Textarea count:", await this.page.locator("textarea").count());
-    console.log("Count:", await this.txtDescriptionComment.count());
-    console.log("Visible:", await this.txtDescriptionComment.isVisible());
-
+    // console.log("Textarea count:", await this.page.locator("textarea").count());
+    // console.log("Count:", await this.txtDescriptionComment.count());
+    // console.log("Visible:", await this.txtDescriptionComment.isVisible()); 
     // await this.txtDescriptionComment.click();
     await this.txtDescriptionComment.fill(keyword);
   }
-
   async clickBtnPlaceOrder(): Promise<void> { 
     console.log("Place Order count:", await this.btnPlaceOrder.count());
     console.log("URL:", this.page.url());
     await this.btnPlaceOrder.click();
   }
+
+  async clickBtnDownInvoice(): Promise<void> {  
+    await this.btnDownInvoice.click();
+  }
   
+  async clickBtnContinueAfterInvoice(): Promise<void> {  
+    await this.btnContinueAfterInvoice.click();
+  }
+
   async enterTxtNameCard(keyword: string): Promise<void> { 
     await this.txtNameCard.fill(keyword);
   }
@@ -94,4 +108,9 @@ export class CheckoutPage extends BasePage {
     await expect(this.textCountry).toContainText(country);
     await expect(this.textPhone).toContainText(phone);
   }
+
+  async verifyOrderSuccess(text: string): Promise<void> { 
+    await expect(this.txtOrderConfirm).toContainText(text); 
+  }
+  //
 }

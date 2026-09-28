@@ -25,7 +25,7 @@ test.beforeEach(async ({ page }) => {
 
 });
  
-test('TC14: Place Order: Register while Checkout', async ({ page }) => {
+test('TC24: Place Order: Register while Checkout', async ({ page }) => {
   // data  
   const firstName: string = "Khoa";
   const lastName: string = "Test";
@@ -71,7 +71,7 @@ test('TC14: Place Order: Register while Checkout', async ({ page }) => {
     await cartPage.clickProceedCheckOutBtn();
   });
  
-  await test.step("8. Click 'Register / Login' butto", async () => {
+  await test.step("8. Click 'Register / Login' button", async () => {
     await cartPage.clickRegisterLoginBtn();
   });
 
@@ -127,14 +127,26 @@ test('TC14: Place Order: Register while Checkout', async ({ page }) => {
   });
         
   await test.step("17. Click 'Pay and Confirm Order' button", async () => {
-    checkoutPage.clickBtnPaySubmit();
+    await checkoutPage.clickBtnPaySubmit();
   });        
  
-  await test.step("19. Click 'Delete Account' button", async () => {
+  await test.step("18. Verify success message 'Your order has been placed successfully!'", async () => {
+    await checkoutPage.verifyOrderSuccess("Your order has been confirmed!");
+  });    
+
+  await test.step("19. Click 'Download Invoice' button and verify invoice is downloaded successfully.", async () => {
+    await checkoutPage.clickBtnDownInvoice();
+  }); 
+
+  await test.step("20. Click 'Continue' button", async () => {
+    await checkoutPage.clickBtnContinueAfterInvoice();
+  });    
+
+  await test.step("21. Click 'Delete Account' button", async () => {
     await homePage.clickDelBtn();
   });        
   
-  await test.step("20. Verify 'ACCOUNT DELETED!' and click 'Continue' button", async () => {
+  await test.step("22. Verify 'ACCOUNT DELETED!' and click 'Continue' button", async () => {
     await homePage.verifyDeleteText("Account Deleted");
     await homePage.clickContinueDeleteBtn(); 
   });
