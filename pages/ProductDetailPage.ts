@@ -2,7 +2,6 @@ import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class ProductDetailPage extends BasePage {
-    
 
     // Locators
   readonly productNameDetail: Locator;

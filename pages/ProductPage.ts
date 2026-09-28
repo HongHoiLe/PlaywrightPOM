@@ -2,8 +2,6 @@ import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class ProductPage extends BasePage {
-    readonly url = 'https://automationexercise.com/products';
-    
 
     // Locators
   readonly allProducttxt: Locator;

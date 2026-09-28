@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Test case 8', () => {
-    test.only('Test case 8: Verify all producr and product detail page', async () => {
+    test('Test case 8: Verify all producr and product detail page', async () => {
         // Step 3
         await test.step('Home page visible', async () => {
             await homePage.expectLogoHomePageVisible();
