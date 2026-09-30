@@ -115,6 +115,8 @@ export class RegisterPage extends BasePage {
     async clickchkOptin(): Promise<void> { 
         await this.chkOptin.check();
     }
+
+    
  
     async enterAddressInformation(firstName: string, lastName: string,
         company: string, address1: string, address2: string,

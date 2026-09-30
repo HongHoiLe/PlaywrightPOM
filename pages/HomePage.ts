@@ -15,8 +15,11 @@ export class HomePage extends BasePage {
   readonly btnAddFirstProduct: Locator;
   readonly btnContinueShop: Locator;
   readonly accDelText: Locator;
-  
- 
+  readonly textLoginAs: Locator;
+  readonly textSubcription: Locator;
+  readonly textTitleAuto: Locator;
+  readonly autoLogo: Locator;
+
   constructor(page: Page) {
     super(page);
     this.loginSignUpBtn = page.getByRole('link', { name: 'Signup / Login' }); 
@@ -26,9 +29,13 @@ export class HomePage extends BasePage {
     this.btnContinueDelete = page.locator("//a[@class='btn btn-primary' and text()='Continue']");
     this.btnProductPage = page.locator("//a[@href='/products']");
     this.btnCartPage = page.locator("//div[@class='shop-menu pull-right']//a[@href='/view_cart']");
+    this.textLoginAs = page.locator("//div[@class='shop-menu pull-right']//i[@class='fa fa-user']/..");
     this.btnAddFirstProduct = page.locator("(//a[@data-product-id='1'])[1]");
     this.btnContinueShop = page.locator("//button[text()='Continue Shopping']");
     this.accDelText = page.locator("//h2[@data-qa='account-deleted']");
+    this.textSubcription = page.locator("//div[@class='single-widget']/h2");
+    this.textTitleAuto = page.locator("(//h2[contains(text(),'Full-Fledged')])[1]");
+    this.autoLogo = page.locator("//div[@class='logo pull-left']/a");
   } 
 
 
@@ -69,8 +76,38 @@ export class HomePage extends BasePage {
     await this.btnContinueShop.click();
   }
 
+  ////////////////////////////////////
   async verifyDeleteText(delText: string): Promise<void> { 
     await expect(this.accDelText).toContainText(delText);
+  }
+
+  async verifyLoginAsText(text: string): Promise<void> { 
+    await expect(this.textLoginAs).toContainText(text);
+  }
+
+  //////////////
+  async scrollToBottom(): Promise<void> {
+    await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  }
+
+  async scrollToTop(): Promise<void> {
+    await this.page.evaluate(() => window.scrollTo(0, 0));
+  }
+
+  async expectTextSubcription(keyword: string): Promise<void> {
+    await expect(this.textSubcription).toHaveText(keyword);
+  }
+
+  async expectTextTitleAuto(keyword: string): Promise<void> {
+    await expect(this.textTitleAuto).toHaveText(keyword);
+  }
+
+  async scrollToSubcription(): Promise<void> {
+    await this.textSubcription.scrollIntoViewIfNeeded();
+  }
+  
+  async scrollToLogo(): Promise<void> {
+    await this.autoLogo.scrollIntoViewIfNeeded();
   }
 }
 

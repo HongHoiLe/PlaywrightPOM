@@ -44,7 +44,8 @@ export class CheckoutPage extends BasePage {
     this.textCountry = page.locator("//ul[@class='address item box']//li[@class='address_country_name']");
     this.textPhone = page.locator("//ul[@class='address item box']//li[@class='address_phone']");
 
-    this.btnDownInvoice = page.locator("//a[@href='/download_invoice/500']");  
+    // this.btnDownInvoice = page.locator("//a[@href='/download_invoice/500']");  
+    this.btnDownInvoice = page.locator("//div[@class='col-sm-9 col-sm-offset-1']/a");  
     this.btnContinueAfterInvoice = page.locator("//a[@class='btn btn-primary' and text()='Continue']");  
     this.txtOrderConfirm = page.locator("//div[@class='col-sm-9 col-sm-offset-1']/p");  
      
@@ -100,6 +101,14 @@ export class CheckoutPage extends BasePage {
 
   async clickBtnPaySubmit(): Promise<void> { 
     await this.btnPaySumbmit.click();
+  } 
+
+  async fillInPaymentDetail(txtNameCard: string, txtCardNumber: string, txtTxtCVC: string, txtExMonth: string, txtExYear: string): Promise<void> { 
+    await this.enterTxtNameCard(txtNameCard);
+    await this.enterTxtCardNumber(txtCardNumber);
+    await this.enterTxtCVC(txtTxtCVC);
+    await this.enterTxtExMonth(txtExMonth);
+    await this.enterTxtExYear(txtExYear); 
   } 
 
   async verifyDeliveryAddress(fullName: string, address1: string, country: string, phone: string): Promise<void> { 

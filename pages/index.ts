@@ -6,6 +6,7 @@ export { ProductPage } from './ProductPage';
 export { ProductPageDetail } from './ProductPageDetail';
 export { CartPage } from './CartPage';
 export { CheckoutPage } from './CheckoutPage';
+export { CategoryPage } from './CategoryPage';
 
 
 export { PlaywrightHomePage } from './PlaywrightHomePage';
