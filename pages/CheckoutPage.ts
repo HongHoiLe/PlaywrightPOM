@@ -1,6 +1,6 @@
 import { Page, Locator, expect, LocatorScreenshotOptions } from '@playwright/test';
 import { BasePage } from './BasePage';
-
+import { registerData } from '../test-data/registerData';
 export class CheckoutPage extends BasePage {
  
   // Locators
@@ -60,20 +60,20 @@ export class CheckoutPage extends BasePage {
   async verifyAddressDetailVidible():  Promise<void>  {
     //Your delivery address
   await expect(this.deliveryName).toContainText('Hieu Vuong Minh');
-  await expect(this.deliveryCompany).toHaveText('GMS');
-  await expect(this.deliveryAddress1).toHaveText('So 9 Pham Van Dong');
-  await expect(this.deliveryAddress2).toHaveText('Ha Noi');
-  await expect(this.deliveryCityStateZipcode).toHaveText('Ha Noi Cau Giay 032154')
-  await expect(this.deliveryCountry).toHaveText('Canada');
-  await expect(this.deliveryPhone).toHaveText('03214587547')
+  await expect(this.deliveryCompany).toHaveText(registerData.company);
+  await expect(this.deliveryAddress1).toHaveText(registerData.address1);
+  await expect(this.deliveryAddress2).toHaveText(registerData.address2);
+  await expect(this.deliveryCityStateZipcode).toHaveText(`${registerData.city} ${registerData.state} ${registerData.zipcode}`)
+  await expect(this.deliveryCountry).toHaveText(registerData.country);
+  await expect(this.deliveryPhone).toHaveText(registerData.mobileNumber);
     //Your billing address
   await expect(this.billingName).toContainText('Hieu Vuong Minh');
-  await expect(this.billingCompany).toHaveText('GMS');
-  await expect(this.billingAddress1).toHaveText('So 9 Pham Van Dong');
-  await expect(this.billingAddress2).toHaveText('Ha Noi');
-  await expect(this.billingCityStateZipcode).toHaveText('Ha Noi Cau Giay 032154')
-  await expect(this.billingCountry).toHaveText('Canada');
-  await expect(this.billingPhone).toHaveText('03214587547')
+  await expect(this.billingCompany).toHaveText(registerData.company);
+  await expect(this.billingAddress1).toHaveText(registerData.address1);
+  await expect(this.billingAddress2).toHaveText(registerData.address2);
+  await expect(this.billingCityStateZipcode).toHaveText(`${registerData.city} ${registerData.state} ${registerData.zipcode}`)
+  await expect(this.billingCountry).toHaveText(registerData.country);
+  await expect(this.billingPhone).toHaveText(registerData.mobileNumber)
 };
     //Review Your Order
   async verifyReviewYourOrderVidible():  Promise<void>  {

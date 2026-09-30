@@ -22,7 +22,7 @@ export class PaymentPage extends BasePage {
     this.ipExpirationMonth = page.locator("//input[@name='expiry_month']");
     this.ipEXpirationYear = page.locator("//input[@name='expiry_year']");
     this.btPayAndConfirmOrder = page.locator("//button[@data-qa='pay-button']");
-    this.txtPaymentdone = page.locator("//p[@text()='Congratulations! Your order has been confirmed!'");
+    this.txtPaymentdone = page.locator("//p[text()='Congratulations! Your order has been confirmed!']");
     this.btDownloadInvoice = page.locator("//a[@href='/download_invoice/1000']")
     this.btContinue = page.locator("//a[@data-qa='continue-button']");
   }

@@ -1,0 +1,18 @@
+export const registerData = {
+    name: 'Vuong Minh Hieu',
+    email: 'vuonghieu1402@gmail.com',
+    ddlDay: '14',
+    ddlMonth: 'January',
+    ddlYear: '1998',
+    password: 'Hieu1402@',
+    firstName: 'Hieu',
+    lastName: 'Vuong Minh',
+    company: 'GMS',
+    address1: 'Toa the Nine',
+    address2: 'So 9 Pham Van Dong',
+    country: 'Canada',
+    state: 'Ha Noi',
+    city: 'Cau Giay',
+    zipcode: '098752',
+    mobileNumber: '0389650024',
+}

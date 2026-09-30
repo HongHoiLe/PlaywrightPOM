@@ -1,6 +1,6 @@
 import { Page, Locator, expect, LocatorScreenshotOptions } from '@playwright/test';
 import { BasePage } from './BasePage';
-
+import { registerData } from '../test-data/registerData';
 export class RegisterPage extends BasePage {
 
   
@@ -17,13 +17,13 @@ export class RegisterPage extends BasePage {
   readonly ddlYear: Locator;
   readonly chkNewsletter: Locator;
   readonly chkReceive: Locator;
-  readonly ipFirtName: Locator;
+  readonly ipFirstName: Locator;
   readonly ipLastName: Locator;
   readonly ipCompany: Locator;
   readonly ipAddress: Locator;
   readonly ipAddress2: Locator;
   readonly ddlCountry: Locator;
-  readonly ipSate: Locator;
+  readonly ipState: Locator;
   readonly ipCity: Locator;
   readonly ipZipcode: Locator;
   readonly ipMobileNumber: Locator;
@@ -45,13 +45,13 @@ export class RegisterPage extends BasePage {
     this.ddlYear = page.locator("//select[@id='years']");
     this.chkNewsletter = page.locator("//input[@name='newsletter']");
     this.chkReceive = page.locator("//input[@name='optin']");
-    this.ipFirtName = page.locator("//input[@data-qa='first_name']");
+    this.ipFirstName = page.locator("//input[@data-qa='first_name']");
     this.ipLastName = page.locator("//input[@data-qa='last_name']");
     this.ipCompany = page.locator("//input[@data-qa='company']");
     this.ipAddress = page.locator("//input[@data-qa='address']");
     this.ipAddress2 = page.locator("//input[@data-qa='address2']");
     this.ddlCountry = page.locator("//select[@id='country']");
-    this.ipSate = page.locator("//input[@data-qa='state']");
+    this.ipState = page.locator("//input[@data-qa='state']");
     this.ipCity = page.locator("//input[@data-qa='city']");
     this.ipZipcode = page.locator("//input[@data-qa='zipcode']");
     this.ipMobileNumber = page.locator("//input[@data-qa='mobile_number']");
@@ -64,9 +64,9 @@ export class RegisterPage extends BasePage {
     await expect(this.txtNewUserSignup).toBeVisible();
   }
   
-  async inputNameEMail(name: string, email: string): Promise<void> {
-    await this.ipName.fill(name);
-    await this.ipEmail.fill(email);
+  async inputNameEMail(): Promise<void> {
+    await this.ipName.fill(registerData.name);
+    await this.ipEmail.fill(registerData.email);
   }
 
   async clickButtonSignup(): Promise<void> {
@@ -79,19 +79,15 @@ export class RegisterPage extends BasePage {
     await expect(this.txtEnterAccountInformation).toBeVisible();
   }
 
-  async clickChkTitle(): Promise<void> {
+  async inputAccountInformation(): Promise<void> {
     await this.RdoTitle.check();
     await expect(this.RdoTitle).toBeChecked();
+    await this.ipPassWord.fill(registerData.password);
+    await this.ddlDay.selectOption(registerData.ddlDay);
+    await this.ddlMonth.selectOption(registerData.ddlMonth);
+    await this.ddlYear.selectOption(registerData.ddlYear);
   }
 
-  async inputPassword(password: string): Promise<void>{
-    await this.ipPassWord.fill(password);
-  } 
-  async selectDateOfBirth (day: string, month: string, year: string): Promise<void>{
-    await this.ddlDay.selectOption(day);
-    await this.ddlMonth.selectOption(month);
-    await this.ddlYear.selectOption(year);
-  }
   async subscribeNewsletter(): Promise<void> {
     await this.chkNewsletter.check();
     }
@@ -100,23 +96,32 @@ export class RegisterPage extends BasePage {
     await this.chkReceive.check();
     }
 
-    async inputAddressInformation(first_name: string, last_name: string, company: string, address: string, address2: string, country: string, state: string,
-      city: string, zipcode: string, mobile_number: string): Promise<void>{
-      await this.ipFirtName.fill(first_name);
-      await this.ipLastName.fill(last_name);
-      await this.ipCompany.fill(company);
-      await this.ipAddress.fill(address);
-      await this.ipAddress2.fill(address2);
-      await this.ddlCountry.selectOption(country);
-      await this.ipSate.fill(state);
-      await this.ipCity.fill(city);
-      await this.ipZipcode.fill(zipcode);
-      await this.ipMobileNumber.fill(mobile_number);
+    async inputAddressInformation(): Promise<void>{
+      await this.ipFirstName.fill(registerData.firstName);
+      await this.ipLastName.fill(registerData.lastName);
+      await this.ipCompany.fill(registerData.company);
+      await this.ipAddress.fill(registerData.address1);
+      await this.ipAddress2.fill(registerData.address2);
+      await this.ddlCountry.selectOption(registerData.country);
+      await this.ipState.fill(registerData.state);
+      await this.ipCity.fill(registerData.city);
+      await this.ipZipcode.fill(registerData.zipcode);
+      await this.ipMobileNumber.fill(registerData.mobileNumber);
     }
 
     async clickCreatAccountButton(): Promise<void>{
       await this.btCreatAcc.click();
     }
+
+    async registerAccount(): Promise<void> {
+      await this.inputNameEMail();
+      await this.clickButtonSignup();
+      await this.inputAccountInformation();
+      await this.subscribeNewsletter();
+      await this.subscribeSpecialOffers();
+      await this.inputAddressInformation();
+      await this.clickCreatAccountButton();
+      }
 
 } 
 
