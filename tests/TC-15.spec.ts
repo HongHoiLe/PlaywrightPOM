@@ -33,8 +33,8 @@ test.beforeEach(async ({ page }) => {
     await homePage.goto();
 });
 
-test.describe('Test case 24', () => {
-    test('Test case 24: Download Invoice After Purchase Order', async() => {
+test.describe('Test case 15', () => {
+    test('Test Case 15: Place Order: Register before Checkout', async () => {
         
         //Signup Detail
         const name = 'Vu Duc Dang';
@@ -64,43 +64,23 @@ test.describe('Test case 24', () => {
         const expirationMonth = '12';
         const expirationYear = '2030';
 
+
         //Step 3
-        await test.step('Home page is visible', async() => {
+        await test.step('Verify home page is visible', async() => {
             await homePage.expectLogoHomePageVisible();
         });
-        
+
         //Step 4
-        await test.step('Add products to cart', async() => {
-            await homePage.clickAddFirstProductToCartbtn();
-            await homePage.clickContinueShoppingbtn();
+        await test.step('Click Signup / Login button', async () => {
+            await homePage.clickSignupLoginbtn();
         });
-        
+
         //Step 5
-        await test.step('Click Cart Button', async() => {
-            await homePage.clickCartbtn();
-        });
-        
-        //Step 6
-        await test.step('Cart page is displayed', async() => {
-            await cartPage.expectCartPageTitleVisible();
-        });
-        
-        //Step 7
-        await test.step('Click Proceed to Checkout', async() => {
-            await cartPage.clickProceedCheckoutbtn();
-        });
-        
-        //Step 8
-        await test.step('Click Register/Login button', async() => {
-            await cartPage.clickRegisterLoginbtn();
-        });
-        
-        //Step 9
         await test.step('Fill all details in Signup and create account', async() => {
             await registerLoginPage.fillNameField(name);
             await registerLoginPage.fillEmailAddressField(email);
             await registerLoginPage.clickSignUpbtn();
-        
+
             await signupPage.clickGenderRadiobtn();
             await signupPage.fillPasswordField(password);
             await signupPage.selectDay(day);
@@ -119,29 +99,40 @@ test.describe('Test case 24', () => {
             await signupPage.fillMobileNumberField(mobileNumber);
             await signupPage.clickCreateAccountbtn();
         });
-        
-        //Step 10
+
+        //Step 6
         await test.step('Verify Account Created and click Continue', async() => {
             await accountCreatedPage.expectAccountCreatedtextVisible();
             await accountCreatedPage.clickContinueBtn();
         });
-        
-        //Step 11
+
+        //Step 7
         await test.step('Verify Logged in as ussername', async() => {
             await homePage.expectLoginSuccesstxtVisible(name);
         });
-        
-        //Step 12
+
+        //Step 8
+        await test.step('Add products to cart', async() => {
+            await homePage.clickAddFirstProductToCartbtn();
+            await homePage.clickContinueShoppingbtn();
+        });
+
+        //Step 9
         await test.step('Click Cart Button', async() => {
             await homePage.clickCartbtn();
         });
-        
-        //Step 13
+
+        //Step 10
+        await test.step('Cart page is displayed', async() => {
+            await cartPage.expectCartPageTitleVisible();
+        });
+
+        //Step 11
         await test.step('Click Proceed to Checkout', async() => {
             await cartPage.clickProceedCheckoutbtn();
         });
-        
-        //Step 14
+
+        //Step 12
         await test.step('Verify address detail and Review order', async() => {
             await checkoutPage.expectFullNamecontain(firstName, lastName);
             await checkoutPage.expectCompanycontain(company);
@@ -151,14 +142,14 @@ test.describe('Test case 24', () => {
             await checkoutPage.expectMobileNumbercontain(mobileNumber);
             await checkoutPage.expectItemInCartCorrect(itemcart);
         });
-        
-        //Step 15
+
+        //Step 13
         await test.step('Enter description and click Place Order', async() => {
             await checkoutPage.fillComment();
             await checkoutPage.clickPlaceOrderbtn();
         });
-        
-        //Step 16
+
+        //Step 14
         await test.step('Enter payment details', async() => {
             await paymentPage.fillNameOnCard(nameOnCard);
             await paymentPage.fillCardNumber(cardNumber);
@@ -166,45 +157,23 @@ test.describe('Test case 24', () => {
             await paymentPage.fillExpirationMonth(expirationMonth);
             await paymentPage.fillExpirationYear(expirationYear);
         });
-        
-        //Step 17
+
+        //Step 15
         await test.step('Click Pay and Confirm button', async() => {
             await paymentPage.clickPayConfirmbtn();
         });
-        
-        //Step 18
+
+        //Step 16
         await test.step('Verify success message', async() => {
             await paymentDonePage.expectPlaceSuccessfulltextVisible();
         });
 
-        //Step 19
-        // await test.step('Click Download Invoice button and verify invoice is downloaded successfully.', async() => {
-        //     const download = await paymentDonePage.downloadedInvoice();
-        //     expect(await download.failure()).toBeNull();
-        //     expect(download.suggestedFilename()).toContain('invoice');
-        // })
-        await test.step('Click Download Invoice button and verify invoice is downloaded successfully.', async() => {
-            const downloadPromise = page.waitForEvent('download');
-            await paymentDonePage.clickDownloadInvoicebtn();
-            const download = await downloadPromise;
-            expect(download.suggestedFilename()).toBe('invoice.pdf');
-
-            const filePath = 'downloads/invoice.pdf';
-            await download.saveAs(filePath);
-
-            expect (fs.existsSync(filePath)).toBeTruthy();
-        });
-        //Step 20
-        await test.step('Click Continue', async() => {
-            await paymentDonePage.clickContinuebtn();
+        //Step 17
+        await test.step('Click delete account', async() => {
+            await paymentDonePage.clickDeleteAccountbtn();
         });
 
-        //Step 21
-        await test.step('Click Delete account', async() => {
-            await homePage.clickDeleteAccountbtn();
-        });
-        
-        //Step 22
+        //Step 18
         await test.step('Verify aacount deleted and click Continue', async() => {
             await deleteAccountPage.expectAccountDeletedTextVisible();
             await deleteAccountPage.clickContinuebtn();

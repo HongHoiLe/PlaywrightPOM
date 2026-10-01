@@ -26,11 +26,11 @@ export class PaymentDonePage extends BasePage {
         await this.deleteAccountbtn.click();
     }
 
-    async downloadedInvoice(): Promise<Download> {
-        const downloadPromise = this.page.waitForEvent('download'); 
-        await this.clickDownloadInvoicebtn();
-        return await downloadPromise;
-    }
+    // async downloadedInvoice(): Promise<Download> {
+    //     const downloadPromise = this.page.waitForEvent('download'); 
+    //     await this.clickDownloadInvoicebtn();
+    //     return await downloadPromise;
+    // }
 
     async clickDownloadInvoicebtn(): Promise <void> {
         await this.downloadInvoicebtn.click();
