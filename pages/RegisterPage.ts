@@ -51,6 +51,9 @@ export class RegisterPage extends BasePage {
     readonly btnCreateAccount: Locator;
     readonly btnContinue: Locator;
 
+    readonly txtEmailLogin: Locator;
+    readonly txtPassLogin: Locator;
+    readonly submitLoginBtn: Locator;
 
     // constructor
     constructor(page: Page) {
@@ -77,6 +80,11 @@ export class RegisterPage extends BasePage {
         this.txtMobPhone = page.locator("//input[@id='mobile_number']");
         this.btnCreateAccount = page.locator("//button[@type='submit' and text()='Create Account']");
         this.btnContinue = page.locator("//a[@class='btn btn-primary' and text()='Continue']");
+
+        // login
+        this.txtEmailLogin = page.locator("//input[@type='email' and @data-qa='login-email']");
+        this.txtPassLogin = page.locator("//input[@placeholder='Password']");
+        this.submitLoginBtn = page.locator("//button[@type='submit' and @data-qa='login-button']"); 
     }
 
     async goto(): Promise<void> {
@@ -116,8 +124,9 @@ export class RegisterPage extends BasePage {
         await this.chkOptin.check();
     }
 
-    
- 
+
+
+    ////////////////////////////////
     async enterAddressInformation(firstName: string, lastName: string,
         company: string, address1: string, address2: string,
         country: string, state: string, city: string, zipCode: string, phoneNumber: string
@@ -143,6 +152,14 @@ export class RegisterPage extends BasePage {
     }
 
 
+    async enterLoginInfo(email: string, pass: string): Promise<void> { 
+        await this.txtEmailLogin.fill(email);
+        await this.txtPassLogin.fill(pass); 
+    }
+
+    async clickSubmitLoginBtn(): Promise<void> {
+        await this.submitLoginBtn.click();
+    }
 
 
 }

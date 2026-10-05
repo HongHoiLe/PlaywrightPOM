@@ -30,12 +30,14 @@ export class HomePage extends BasePage {
     this.btnProductPage = page.locator("//a[@href='/products']");
     this.btnCartPage = page.locator("//div[@class='shop-menu pull-right']//a[@href='/view_cart']");
     this.textLoginAs = page.locator("//div[@class='shop-menu pull-right']//i[@class='fa fa-user']/..");
-    this.btnAddFirstProduct = page.locator("(//a[@data-product-id='1'])[1]");
     this.btnContinueShop = page.locator("//button[text()='Continue Shopping']");
     this.accDelText = page.locator("//h2[@data-qa='account-deleted']");
     this.textSubcription = page.locator("//div[@class='single-widget']/h2");
     this.textTitleAuto = page.locator("(//h2[contains(text(),'Full-Fledged')])[1]");
     this.autoLogo = page.locator("//div[@class='logo pull-left']/a");
+
+    // Product
+    this.btnAddFirstProduct = page.locator("(//a[@data-product-id='1'])[1]");
   } 
 
 

@@ -18,8 +18,10 @@ test.beforeEach(async ({ page }) => {
 
 });
  
-test('TC8: Verify All Products and product detail page', async ({ page }) => {
-     
+test('Test Case 9: Search Product', async ({ page }) => {
+  // data  
+  const searchKeyWord: string = "Green";
+
   await test.step("Launch browser", async () => {
     await page.goto('https://automationexercise.com/');
     await expect(page).toHaveTitle(/Automation Exercise/);
@@ -33,16 +35,17 @@ test('TC8: Verify All Products and product detail page', async ({ page }) => {
     await productPage.checkURL();
   });
     
-  await test.step("6. The products list is visible", async () => {
-    await productPage.verifyTextCenterVisible();
+  await test.step("6. Enter product name in search input and click search button", async () => {
+    await productPage.enterSearchProduct(searchKeyWord);
+    await productPage.clickBtnSearchSubmit();
   });
   
-  await test.step("7. Click on 'View Product' of first product", async () => {
-    await productPage.clickBtnViewFirstProduct();
+  await test.step("7. Verify 'SEARCHED PRODUCTS' is visible", async () => {
+    await productPage.verifyTextCenter("Searched Products");
   });
 
-  await test.step("9. Verify that detail detail is visible", async () => {
-    await productPageDetail.verifyProductDetail();
+  await test.step("8. Verify all the products related to search are visible", async () => {
+    await productPage.checkProductSearchResult(searchKeyWord);
   });  
    
   
