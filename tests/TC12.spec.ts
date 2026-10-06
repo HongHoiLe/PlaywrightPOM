@@ -58,6 +58,7 @@ test('Test Case 12: Add Products in Cart', async ({ page }) => {
 
   // await test.step("10. Verify their prices, quantity and total price", async () => { 
   // }); 
+  // test
  
 });
 
