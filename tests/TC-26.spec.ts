@@ -9,7 +9,7 @@ test.beforeEach(async ({ page }) => {
     await homePage.goto();
 });
 test.describe('Test case 26', () => {
-    test.only('Test Case 26: Verify Scroll Up without Arrow button and Scroll Down functionality', async() => {
+    test('Test Case 26: Verify Scroll Up without Arrow button and Scroll Down functionality', async() => {
 
         //Step 3
         await test.step('Home page is visible', async() => {

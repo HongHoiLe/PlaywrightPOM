@@ -8,6 +8,7 @@ import { PaymentPage } from '../pages/PaymentPage';
 import { PaymentDonePage } from '../pages/PaymentDonePage';
 import { DeleteAccountPage } from '../pages/DeleteAccountPage';
 import { AccountCreatedPage } from '../pages/AccountCreatedPage';
+import fs from 'fs';
 
     let homePage: HomePage;
     let cartPage: CartPage;
@@ -34,7 +35,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Test case 24', () => {
-    test('Test case 24: Download Invoice After Purchase Order', async() => {
+    test('Test case 24: Download Invoice After Purchase Order', async({page }) => {
         
         //Signup Detail
         const name = 'Vu Duc Dang';
@@ -187,9 +188,9 @@ test.describe('Test case 24', () => {
             const downloadPromise = page.waitForEvent('download');
             await paymentDonePage.clickDownloadInvoicebtn();
             const download = await downloadPromise;
-            expect(download.suggestedFilename()).toBe('invoice.pdf');
+            expect(download.suggestedFilename()).toBe('invoice.txt');
 
-            const filePath = 'downloads/invoice.pdf';
+            const filePath = 'downloads/invoice.txt';
             await download.saveAs(filePath);
 
             expect (fs.existsSync(filePath)).toBeTruthy();
