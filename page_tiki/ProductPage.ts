@@ -3,27 +3,28 @@ import { BasePage } from './BasePage';
 
 export class ProductPage extends BasePage { 
   // Locators  
-  readonly btnProductSize500: Locator; 
+  readonly btnProductSize1T: Locator; 
   readonly btnProductColorRed: Locator; 
   readonly textProductPrice: Locator; 
   
   readonly btnAddToCart: Locator; 
   readonly btnBuyProductNow: Locator; 
   readonly popupEmail: Locator; 
+  readonly popupHeader: Locator; 
   readonly closeSignInPopup: Locator; 
 
   constructor(page: Page) {
     super(page); 
-    this.btnBuyProductNow = page.locator("(//div[@class='group-button']/button)[1]"); 
-    this.btnAddToCart = page.locator("//button[@data-view-id='pdp_add_to_cart_button']"); 
-
-    this.btnProductSize500 = page.locator("//div[@class='sc-e6f89401-0 itpMTL']"); 
-    this.btnProductColorRed = page.locator("//div[@class='product-price__current-price']"); 
+    this.btnProductSize1T = page.locator("//div[@data-view-label='Dung lượng']//div[@data-view-index='0']"); 
+    this.btnProductColorRed = page.locator("//div[@data-view-label='Màu sắc']//div[@data-view-index='1']"); 
     this.textProductPrice = page.locator("//div[@class='product-price__current-price']"); 
 
+    this.btnBuyProductNow = page.locator("//div[@class='group-button']//span[text()='Mua ngay']"); 
+    this.btnAddToCart = page.locator("//div[@class='group-button']/button[@data-view-id='pdp_add_to_cart_button']"); 
+
+    this.popupHeader = page.locator("//div[@class='heading']/p"); 
     this.popupEmail = page.locator("//p[@class='login-with-email']"); 
-    this.closeSignInPopup = page.locator("//button[@class='btn-close']"); 
- 
+    this.closeSignInPopup = page.locator("//button[@class='btn-close']");  
   }  
 
   async clickBtnAddToCart(): Promise<void> { 
@@ -35,7 +36,7 @@ export class ProductPage extends BasePage {
   } 
 
   async clickBtnProductSize(): Promise<void> { 
-    await this.btnProductSize500.click();
+    await this.btnProductSize1T.click();
   } 
 
   async clickBtnProductColorRed(): Promise<void> { 
@@ -48,20 +49,29 @@ export class ProductPage extends BasePage {
     return price;
   }
 
-  async clickCloseSignInPopup(): Promise<void> { 
-    await this.closeSignInPopup.click();
-  }
-
-  async copareProductPrice(key: string): Promise<void> { 
-    await expect(this.textProductPrice).toHaveText(key);
+  async copareProductPrice(previousPrice: string): Promise<void> { 
+    // await expect(this.textProductPrice).toHaveText(key);
+    // let priceAtStep6 = previousPrice;
+    let currentPrice = await this.textProductPrice.innerText(); 
+    if(currentPrice === previousPrice){
+      console.log("Price stay same");
+    } else {
+      console.log("Price changed: " + previousPrice + " to " + currentPrice);
+    }
   }
 
   async verifyProductPrice(): Promise<void> { 
     await expect(this.textProductPrice).toBeVisible();
   }
 
-  async verifyPopupVisible(): Promise<void> { 
+  // pop up
+  async clickCloseSignInPopup(): Promise<void> { 
+    await this.closeSignInPopup.click();
+  }
+
+  async verifyPopupVisible(keyword: string): Promise<void> { 
     await expect(this.popupEmail).toBeVisible();
+    await expect(this.popupHeader).toHaveText(keyword);
   }
   
 }

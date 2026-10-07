@@ -16,8 +16,7 @@ test('mua hang tiki', async ({ page }) => {
   let productPrice: string = "";
 
   await test.step("1. Truy cap https://tiki.vn/", async () => {
-    await page.goto('https://tiki.vn/');
-    // await expect(page).toHaveTitle(/Automation Exercise/);
+    await page.goto('https://tiki.vn/'); 
   }); 
 
   await test.step("2. Click vao button Close de tat quang cao", async () => {
@@ -54,7 +53,7 @@ test('mua hang tiki', async ({ page }) => {
   }); 
 
   await test.step("10. Verify popup dang nhap hoac dang ky xuat hien", async () => {
-    await productPage.verifyPopupVisible();
+    await productPage.verifyPopupVisible("Đăng nhập hoặc Tạo tài khoản");
   }); 
 
   await test.step("11. Click button Mua ngay", async () => { 
@@ -63,7 +62,7 @@ test('mua hang tiki', async ({ page }) => {
   }); 
 
   await test.step("12 Verify pop up dang nhap hoac dang ky xuat hien", async () => {
-    await productPage.verifyPopupVisible();
+    await productPage.verifyPopupVisible("Đăng nhập hoặc Tạo tài khoản");
   }); 
 });
 
