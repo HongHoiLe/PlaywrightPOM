@@ -62,7 +62,7 @@ export class CartPage extends BasePage {
   async getProductListCartInfo(): Promise<void>{
     const productCount = await this.productName.count();
     for (let i=0; i<productCount; i++){
-      const productName = await this.productName.nth(i);
+      const productName = this.productName.nth(i);
       console.log(i + ". " + productName.innerText);
  
       // const productPrice = this.productPrice.nth(i);
