@@ -12,6 +12,7 @@ test.beforeEach(async ({ page }) => {
  
 });
  
+// npx playwright test TC_Tiki.spec.ts --headed
 test('mua hang tiki', async ({ page }) => {
   let productPrice: string = "";
 
