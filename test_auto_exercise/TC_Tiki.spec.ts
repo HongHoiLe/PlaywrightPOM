@@ -25,7 +25,7 @@ test('mua hang tiki', async ({ page }) => {
   }); 
   
   await test.step("3. Tim kiem san pham Iphone 18 promax", async () => {
-    await homePage.enterSearchProduct("Iphone 18 promax")
+    await homePage.enterSearchProduct("Apple iPhone 18 Pro Max");
   }); 
 
   await test.step("4. Click vao san pham dau tien trong ket qua tim kiem", async () => {

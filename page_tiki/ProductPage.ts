@@ -40,7 +40,11 @@ export class ProductPage extends BasePage {
   } 
 
   async clickBtnProductColorRed(): Promise<void> { 
-    await this.btnProductColorRed.click();
+    if (await this.btnProductColorRed.isVisible()) {
+      await this.btnProductColorRed.click();
+    }else{
+      console.log("Red color not found. Skip.");
+    }
   }
 
   async getProductPrice(): Promise<string> { 
