@@ -32,20 +32,23 @@ test('mua hang tiki', async ({ page }) => {
     await homePage.clickBtnFirstProduct();
   }); 
  
-  await test.step("5. Click chon dung luong 1 TB", async () => {
-    await productPage.clickBtnProductSize();
-  }); 
   
-  await test.step("6. Verify gia san pham", async () => {
+  await test.step("5. Verify gia san pham (256GB)", async () => {
     await productPage.verifyProductPrice();
+    console.log("5.Price at 256GB: ");
     productPrice = await productPage.getProductPrice();
   }); 
 
-  await test.step("7. chon mau do", async () => {
-    await productPage.clickBtnProductColorRed();
+  await test.step("6. Click chon dung luong 1 TB", async () => {
+    await productPage.clickBtnProductSize();
   }); 
 
+  // await test.step("7. chon mau do", async () => {
+  //   await productPage.clickBtnProductColorRed();
+  // }); 
+
   await test.step("8 so sanh gia san pham so voi gia o buoc 6", async () => {
+    //await page.pause();
     await productPage.copareProductPrice(productPrice);
   }); 
 
@@ -67,4 +70,4 @@ test('mua hang tiki', async ({ page }) => {
   }); 
 });
 
- 
+ // 

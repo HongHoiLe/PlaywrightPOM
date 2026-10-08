@@ -58,7 +58,7 @@ export class CheckoutPage extends BasePage {
  
   // Button
   async enterTxtDescriptionComment(keyword: string): Promise<void> { 
-    //await this.txtDescriptionComment.waitFor({ state: 'visible' }); 
+    // await this.txtDescriptionComment.waitFor({ state: 'visible' }); 
     // console.log("Textarea count:", await this.page.locator("textarea").count());
     // console.log("Count:", await this.txtDescriptionComment.count());
     // console.log("Visible:", await this.txtDescriptionComment.isVisible()); 

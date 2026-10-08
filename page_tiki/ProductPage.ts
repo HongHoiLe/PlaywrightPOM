@@ -47,26 +47,27 @@ export class ProductPage extends BasePage {
     }
   }
 
+  async verifyProductPrice(): Promise<void> { 
+    await expect(this.textProductPrice).toBeVisible();
+  }
+
   async getProductPrice(): Promise<string> { 
-    const price = await this.textProductPrice.innerText(); 
+    let price = await this.textProductPrice.innerText(); 
     console.log("Price: " + price);
     return price;
   }
 
-  async copareProductPrice(previousPrice: string): Promise<void> { 
-    // await expect(this.textProductPrice).toHaveText(key);
-    // let priceAtStep6 = previousPrice;
-    let currentPrice = await this.textProductPrice.innerText(); 
+  async copareProductPrice(previousPrice: string): Promise<void> {  
+    await this.textProductPrice.waitFor({state:'visible', timeout:3000});
+
+    let currentPrice = await this.textProductPrice.innerText();  
     if(currentPrice === previousPrice){
-      console.log("Price stay same");
+      console.log("Price stay same at: " + currentPrice);
     } else {
-      console.log("Price changed: " + previousPrice + " to " + currentPrice);
+      console.log("Old Price: " + previousPrice + "| New price: " + currentPrice);
     }
   }
 
-  async verifyProductPrice(): Promise<void> { 
-    await expect(this.textProductPrice).toBeVisible();
-  }
 
   // pop up
   async clickCloseSignInPopup(): Promise<void> { 
