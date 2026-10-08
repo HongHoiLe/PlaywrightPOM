@@ -14,9 +14,9 @@ export class ProductDetailPage extends BasePage {
 
     constructor (page: Page) {
         super(page);
-        this.storageFirstOption = page.locator ("//div [@data-view-id = 'pdp_main_select_configuration_item'] // span [text() = '1TB']");
+        this.storageFirstOption = page.locator ("// span [text() = '1TB']// parent:: div [@data-view-id = 'pdp_main_select_configuration_item']");
         this.price1tbOption = page.locator ("//div [@class = 'product-price__current-price']");
-        this.colorSecondOption = page.locator ("//div [@data-view-id = 'pdp_main_select_configuration_item']// child:: span [contains (text(),'Đỏ')]");
+        this.colorSecondOption = page.locator ("// span [contains (text(),'Đỏ')]// ancestor:: div [@data-view-id = 'pdp_main_select_configuration_item']");
         this.addToCartBtn = page.locator ("//button [@data-view-id = 'pdp_add_to_cart_button']");
         this.registerPopup = page.locator ("//div [@class = 'heading']");
         this.closePopupBtn = page.locator ("//button [@class = 'btn-close']");
@@ -40,7 +40,7 @@ export class ProductDetailPage extends BasePage {
     }
 
     async expectRegisterPopupVisible(): Promise <void> {
-        await expect(this.registerPopup).toContainText("Đăng Nhập")
+        await expect(this.registerPopup).toContainText("Đăng nhập")
     }
 
     async clickClosePopupBtn(): Promise <void> {

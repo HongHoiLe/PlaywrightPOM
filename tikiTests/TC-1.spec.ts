@@ -27,6 +27,14 @@ test.describe('Test case 1', () => {
             await homePage.fillSearchBox(item);
         });
 
+        await test.step('Click vao button Search', async() => {
+            await homePage.clickSearchBtn();
+        });
+
+        await test.step('Verify user da tim thay san pham', async() => {
+            await productPage.expectBreadCrumbVisible();
+        });
+
         await test.step('Click vao san pham dau tien trong ket qua tim kiem', async() => {
             await productPage.clickFirstProduct();
         });
@@ -60,6 +68,10 @@ test.describe('Test case 1', () => {
 
         await test.step('Verify popup', async() => {
             await productDetailPage.expectRegisterPopupVisible();
+        });
+
+        await test.step('Click button dong popup', async() => {
+            await productDetailPage.clickClosePopupBtn();
         });
 
         await test.step('Click button mua ngay', async() => {

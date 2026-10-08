@@ -26,6 +26,9 @@ export class HomePage extends BasePage {
 
     async fillSearchBox(item: string): Promise <void> {
         await this.searchBox.fill(item);
+    }
+
+    async clickSearchBtn(): Promise <void> {
         await this.searchBtn.click();
     }
 }
