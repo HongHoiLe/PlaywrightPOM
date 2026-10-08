@@ -15,12 +15,12 @@ export class ProductDetailPage extends BasePage {
     constructor (page: Page) {
         super(page);
         this.storageFirstOption = page.locator ("//div [@data-view-id = 'pdp_main_select_configuration_item'] // span [text() = '1TB']");
-        this.price1tbOption = page.locator ("//div [@class = 'sc-31ecf63b-1 fgrIVW']");
+        this.price1tbOption = page.locator ("//div [@class = 'product-price__current-price']");
         this.colorSecondOption = page.locator ("//div [@data-view-id = 'pdp_main_select_configuration_item']// child:: span [contains (text(),'Đỏ')]");
         this.addToCartBtn = page.locator ("//button [@data-view-id = 'pdp_add_to_cart_button']");
         this.registerPopup = page.locator ("//div [@class = 'heading']");
         this.closePopupBtn = page.locator ("//button [@class = 'btn-close']");
-        this.buyNowBtn = page.locator ("//button [@class = 'sc-9e5b140a-0 hDQYRF']");
+        this.buyNowBtn = page.locator ("//div [@class = 'group-button']// child:: span [contains (text(),'Mua ngay')]");
     }
 
     async clickStorageFirstOption(): Promise <void> {
