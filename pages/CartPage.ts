@@ -14,6 +14,8 @@ export class CartPage extends BasePage {
   readonly productPrice: Locator; 
   readonly productQty: Locator; 
   readonly productTotalPrice: Locator; 
+  btnDeleteProduct: Locator;
+  textCartEmpty: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -27,7 +29,11 @@ export class CartPage extends BasePage {
     this.productPrice = page.locator("//table[@class='table table-condensed']/tbody/tr/td[@class='cart_price']/p");   
     this.productQty = page.locator("//table[@class='table table-condensed']/tbody/tr/td[@class='cart_quantity']/button");   
     this.productTotalPrice = page.locator("//table[@class='table table-condensed']/tbody/tr/td[@class='cart_total']/p");   
+
     
+    this.btnDeleteProduct = page.locator("//table[@class='table table-condensed']/tbody/tr/td[@class='cart_delete']/a");    
+    this.textCartEmpty = page.locator("//p[@class='text-center']//b");    
+		
   } 
 
 
@@ -45,8 +51,8 @@ export class CartPage extends BasePage {
   }
   
   
-  async verifyCartDisplay(keyword: string): Promise<void> { 
-    await expect(this.shoppingCartText).toHaveText(keyword);
+  async verifyCartDisplay(): Promise<void> { 
+    await expect(this.shoppingCartText).toHaveText("Shopping Cart");
   }
 
   async checkProductListCart (searchKey: string): Promise<void>{
@@ -73,4 +79,12 @@ export class CartPage extends BasePage {
   }
 
 
+  async deleteFirstProduct(): Promise<void> { 
+    await this.btnDeleteProduct.click();
+  }
+  
+  
+  async verifyCartEmpty(): Promise<void> { 
+    await expect(this.textCartEmpty).toContainText("Cart is empty!"); 
+  }
 }

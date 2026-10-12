@@ -19,24 +19,43 @@ export class HomePage extends BasePage {
   readonly textSubcription: Locator;
   readonly textTitleAuto: Locator;
   readonly autoLogo: Locator;
+  readonly btnScrollUpArrow: Locator;
+  readonly textLoginUserName: Locator;
+  btnAddRecommnedProduct: Locator;
+  btnRecommnedProductName: Locator;
+  textRecommendProduct: Locator;
+  btnViewCart: Locator;
 
   constructor(page: Page) {
     super(page);
     this.loginSignUpBtn = page.getByRole('link', { name: 'Signup / Login' }); 
      
     this.textSignUp = page.locator("//h2[text()='New User Signup!']");
+
     this.btnDel = page.locator("//a[@href='/delete_account']");
     this.btnContinueDelete = page.locator("//a[@class='btn btn-primary' and text()='Continue']");
     this.btnProductPage = page.locator("//a[@href='/products']");
     this.btnCartPage = page.locator("//div[@class='shop-menu pull-right']//a[@href='/view_cart']");
+    
+
     this.textLoginAs = page.locator("//div[@class='shop-menu pull-right']//i[@class='fa fa-user']/..");
+    this.textLoginUserName = page.locator("//div[@class='shop-menu pull-right']//i[@class='fa fa-user']/../b");
+
     this.btnContinueShop = page.locator("//button[text()='Continue Shopping']");
     this.accDelText = page.locator("//h2[@data-qa='account-deleted']");
+
     this.textSubcription = page.locator("//div[@class='single-widget']/h2");
     this.textTitleAuto = page.locator("(//h2[contains(text(),'Full-Fledged')])[1]");
     this.autoLogo = page.locator("//div[@class='logo pull-left']/a");
+    this.btnScrollUpArrow = page.locator("//a[@id='scrollUp']");
+    
 
+    this.textRecommendProduct = page.locator("//div[@class='recommended_items']/h2");
+    this.btnAddRecommnedProduct = page.locator("//div[@id='recommended-item-carousel']//div[@class='productinfo text-center']/a");
+    this.btnRecommnedProductName = page.locator("//div[@id='recommended-item-carousel']//div[@class='productinfo text-center']/p"); 
+    
     // Product
+    this.btnViewCart = page.locator("//p[@class='text-center']//a[@href='/view_cart']");
     this.btnAddFirstProduct = page.locator("(//a[@data-product-id='1'])[1]");
   } 
 
@@ -87,6 +106,10 @@ export class HomePage extends BasePage {
     await expect(this.textLoginAs).toContainText(text);
   }
 
+  async verifyLoginAsUserName(text: string, username: string): Promise<void> { 
+    await expect(this.textLoginAs).toContainText(text);
+    await expect(this.textLoginUserName).toContainText(username);
+  }
   //////////////
   async scrollToBottom(): Promise<void> {
     await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
@@ -107,11 +130,35 @@ export class HomePage extends BasePage {
   async scrollToSubcription(): Promise<void> {
     await this.textSubcription.scrollIntoViewIfNeeded();
   }
+
+  
+  async clickBtnScrollUpArrow(): Promise<void> {
+    await this.btnScrollUpArrow.click();
+  }
   
   async scrollToLogo(): Promise<void> {
     await this.autoLogo.scrollIntoViewIfNeeded();
   }
+
+// recommend
+
+  async verifyTextRecommend(text: string): Promise<void> { 
+    await expect(this.textRecommendProduct).toContainText(text);
+  }
+
+  async addRecommnedProduct(): Promise<string> {  
+    let productName: string = await this.btnRecommnedProductName.nth(1).innerText();
+    console.log("Product name: " + productName); 
+    await this.btnAddRecommnedProduct.nth(1).click();
+    return productName;
+  }
+  
+  async clickBtnViewCart(): Promise<void> {
+    await this.btnViewCart.click();
+  }
 }
+
+
 
 
   // private textSignUp = this.page.locator("//h2[text()='New User Signup!']");

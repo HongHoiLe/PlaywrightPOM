@@ -11,7 +11,7 @@ export class ProductPageDetail extends BasePage {
   readonly txtName: Locator;
   readonly txtEmail: Locator;
   readonly txtReviewComment: Locator;
-  readonly submitBtn: Locator;
+  readonly submitReviewBtn: Locator;
   readonly productName: Locator;
   readonly productCategory: Locator;
   readonly productPrice: Locator;
@@ -24,10 +24,11 @@ export class ProductPageDetail extends BasePage {
     this.txtProductQty = page.locator("//input[@id='quantity']");
     this.btnAddToCart = page.locator("//button[@class='btn btn-default cart']");
     this.btnViewCart = page.locator("//u[text()='View Cart']");
+    
     this.txtName = page.locator("//input[@placeholder='Your Name']");
     this.txtEmail = page.locator("//input[@placeholder='Email Address']");
     this.txtReviewComment = page.locator("//textarea[@placeholder='Add Review Here!']");
-    this.submitBtn = page.locator("//button[@type='submit' and @id='button-review']");
+    this.submitReviewBtn = page.locator("//button[@type='submit' and @id='button-review']");
     
     this.productName = page.locator("//div[@class='product-information']/h2");
     this.productCategory = page.locator("//div[@class='product-information']/p[1]");
@@ -68,4 +69,11 @@ export class ProductPageDetail extends BasePage {
   }
 
  
+  async addRecommend(name: string, email: string, comment: string): Promise<void> { 
+    await this.txtName.fill(name);
+    await this.txtEmail.fill(email);
+    await this.txtReviewComment.fill(comment);
+    await this.submitReviewBtn.click();
+  }
+  
 }

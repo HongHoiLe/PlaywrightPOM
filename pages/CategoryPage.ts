@@ -15,6 +15,7 @@ export class CategoryPage extends BasePage {
   readonly btnSubCategorySaree: Locator;
   readonly btnSubCategoryTShirt: Locator;
   readonly btnSubCategoryJean: Locator;
+  textBrand: Locator;
 
   constructor(page: Page) {
     super(page);  
@@ -28,6 +29,8 @@ export class CategoryPage extends BasePage {
     this.btnSubCategorySaree = page.locator("//div[@class='panel-group category-products']//div[@id='Women']//li[3]/a");
     this.btnSubCategoryTShirt = page.locator("//div[@class='panel-group category-products']//div[@id='Men']//li[1]/a");
     this.btnSubCategoryJean = page.locator("//div[@class='panel-group category-products']//div[@id='Men']//li[2]/a");
+
+    this.textBrand = page.locator("//div[@class='brands_products']/h2");
   }
 
 
@@ -107,5 +110,10 @@ export class CategoryPage extends BasePage {
         break;
     }  
   }  
+
+  
+  async verifyTextBrand(): Promise<void> { 
+    await expect(this.textBrand).toContainText("Brands");
+  }
  
 }
