@@ -72,7 +72,10 @@ export class ProductPageDetail extends BasePage {
   async addRecommend(name: string, email: string, comment: string): Promise<void> { 
     await this.txtName.fill(name);
     await this.txtEmail.fill(email);
-    await this.txtReviewComment.fill(comment);
+    await this.txtReviewComment.fill(comment); 
+  }
+  
+  async clickSubmitReviewBtn(): Promise<void> {  
     await this.submitReviewBtn.click();
   }
   

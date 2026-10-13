@@ -20,9 +20,7 @@ test.beforeEach(async ({ page }) => {
   productPage = new ProductPage(page);
   productPageDetail = new ProductPageDetail(page);
   cartPage = new CartPage(page);
-  checkoutPage = new CheckoutPage(page);
-
-
+  checkoutPage = new CheckoutPage(page); 
 });
  
 test('Test Case 21: Add review on product', async ({ page }) => { 
@@ -33,28 +31,29 @@ test('Test Case 21: Add review on product', async ({ page }) => {
   });
   
   await test.step("3. Click on 'Products' button", async () => { 
-    await homePage.scrollToSubcription();
+    await homePage.clickBtnProductPage();
   });
 
   await test.step("4. Verify user is navigated to ALL PRODUCTS page successfully", async () => {
-    await homePage.verifyTextRecommend("recommended items");
+    await productPage.checkURL();
   });  
 
   await test.step("5. Click on 'View Product' button", async () => {   
-    await homePage.addRecommnedProduct(); 
+    await productPage.clickBtnViewFirstProduct(); 
   });  
   
   await test.step("6. Verify 'Write Your Review' is visible", async () => {  
-    await homePage.clickBtnViewCart();
+    
   });  
     
   await test.step("7. Enter name, email and review", async () => {  
-    
+    await productPageDetail.addRecommend("khoa", "khoa@gmail.com", "abcd");
   });  
 
   await test.step("8. Click 'Submit' button", async () => {  
-    
+    await productPageDetail.clickSubmitReviewBtn();
   });  
+  
   await test.step("9. Verify success message 'Thank you for your review.'", async () => {  
     
   });  

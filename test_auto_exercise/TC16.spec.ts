@@ -21,8 +21,6 @@ test.beforeEach(async ({ page }) => {
   productPageDetail = new ProductPageDetail(page);
   cartPage = new CartPage(page);
   checkoutPage = new CheckoutPage(page);
-
-
 });
  
 test('Test Case 16: Place Order: Login before Checkout', async ({ page }) => {
@@ -48,6 +46,9 @@ test('Test Case 16: Place Order: Login before Checkout', async ({ page }) => {
   const txtExMonth: string = "12";
   const txtExYear: string = "2030";
   const txtReviewComment: string = "comment";
+  
+  const emailLogin: string = "khoalnv83@gmail.com";
+  const passLogin: string = "123";
    
   await test.step("Launch browser", async () => {
     await page.goto('https://automationexercise.com/');
@@ -58,77 +59,61 @@ test('Test Case 16: Place Order: Login before Checkout', async ({ page }) => {
     await homePage.clickLoginSignUpBtn();
   });
 
-  await test.step("5. Fill all details in Signup and create account", async () => {
-    // register page
-    const randomEmail = `test${Math.floor(Math.random() * 100000)}@example.com`;
+  await test.step("5. Fill email, password and click 'Login' button", async () => { 
+      await registerPage.enterLoginInfo(emailLogin, passLogin);
+      await registerPage.clickSubmitLoginBtn();
 
-    await registerPage.enterUserId(firstName);
-    await registerPage.enterEmail(randomEmail); // create random string 
-    await registerPage.clickSubmitBtn();
+  });   
 
-    // Fill in account info
-    await registerPage.clickRdoGenderMale();
-    await registerPage.enterPassword(passWord);
-    await registerPage.selectValueDay(dayDOB, monthDOB, yearDOB);
-    await registerPage.clickRdoGenderMale(); 
-    await registerPage.enterAddressInformation(firstName, lastName, company, address1, address2,
-                                              country, state, city, zipCode, phoneNumber); 
-    await registerPage.clickCreateAccountBtn();  
-  });  
-
-  await test.step("6. Verify 'ACCOUNT CREATED!' and click 'Continue' button", async () => {  
-    await registerPage.clickContinueBtn();
-  });  
-  
-  await test.step("7. Verify ' Logged in as username' at top", async () => {  
+  await test.step("6. Verify ' Logged in as username' at top", async () => {  
     await homePage.verifyLoginAsText("Logged in as");
   });  
    
-  await test.step("8. Add products to cart", async () => {
+  await test.step("7. Add products to cart", async () => {
     await homePage.clickBtnAddFirstProduct();
     await homePage.clickBtnContinueShop();
   });
  
-  await test.step("9. Click 'Cart' button", async () => {
+  await test.step("8. Click 'Cart' button", async () => {
     await homePage.clickbBtnCartPage();
   }); 
 
-  await test.step("10. Verify that cart page is displayed", async () => {
-    await cartPage.verifyCartDisplay("Shopping Cart");
+  await test.step("9. Verify that cart page is displayed", async () => {
+    await cartPage.verifyCartDisplay();
   });
 
-  await test.step("11. Click Proceed To Checkout", async () => {
+  await test.step("10. Click Proceed To Checkout", async () => {
     await cartPage.clickProceedCheckOutBtn();
   });
   
-  await test.step("12. Verify Address Details and Review Your Order", async () => {
+  await test.step("11. Verify Address Details and Review Your Order", async () => {
     const fullName = firstName.concat(" ", lastName);
     await checkoutPage.verifyDeliveryAddress(fullName, address1, country, phoneNumber);
   });
   
-  await test.step("13. Enter description in comment text area and click 'Place Order'", async () => {
+  await test.step("12. Enter description in comment text area and click 'Place Order'", async () => {
     await checkoutPage.enterTxtDescriptionComment(txtReviewComment);
     await checkoutPage.clickBtnPlaceOrder();
   });
 
 
-  await test.step("14. Enter payment details", async () => {  
+  await test.step("13. Enter payment details", async () => {  
     await checkoutPage.fillInPaymentDetail(txtNameCard, txtCardNumber, txtTxtCVC, txtExMonth, txtExYear);
   });
         
-  await test.step("15. Click 'Pay and Confirm Order' button", async () => {
+  await test.step("14. Click 'Pay and Confirm Order' button", async () => {
     checkoutPage.clickBtnPaySubmit();
   });        
  
-  await test.step("16. Verify success message 'Your order has been placed successfully!'", async () => {
+  await test.step("15. Verify success message 'Your order has been placed successfully!'", async () => {
     await checkoutPage.verifyOrderSuccess("Your order has been confirmed!");
   });    
  
-  await test.step("17. Click 'Delete Account' button", async () => {
+  await test.step("16. Click 'Delete Account' button", async () => {
     await homePage.clickDelBtn();
   });        
   
-  await test.step("18. Verify 'ACCOUNT DELETED!' and click 'Continue' button", async () => {
+  await test.step("17. Verify 'ACCOUNT DELETED!' and click 'Continue' button", async () => {
     await homePage.verifyDeleteText("Account Deleted");
     await homePage.clickContinueDeleteBtn(); 
   });

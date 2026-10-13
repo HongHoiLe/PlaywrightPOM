@@ -60,7 +60,7 @@ test('Test Case 20: Search Products and Verify Cart After Login', async ({ page 
    
   await test.step("9. Click 'Cart' button and verify that products are visible in cart", async () => {
     await homePage.clickbBtnCartPage(); 
-    await cartPage.verifyCartDisplay("Shopping Cart");
+    await cartPage.verifyCartDisplay();
   }); 
 
   await test.step("10. Click 'Signup / Login' button and submit login details", async () => {

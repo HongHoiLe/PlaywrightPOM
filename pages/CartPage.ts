@@ -80,7 +80,16 @@ export class CartPage extends BasePage {
 
 
   async deleteFirstProduct(): Promise<void> { 
+    let deletedProductName = await this.productName.innerText(); 
+    let productCount = await this.productName.count();
+ 
     await this.btnDeleteProduct.click();
+    // await expect(productName).toBeHidden();
+    for (let i=0; i<productCount; i++){
+      const productName = this.productName.nth(i);
+      console.log(i + ". " + productName.innerText);
+      await expect(this.productName).not.toHaveText(deletedProductName);
+    }
   }
   
   
