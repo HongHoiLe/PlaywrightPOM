@@ -55,7 +55,7 @@ export class CartPage extends BasePage {
     await expect(this.shoppingCartText).toHaveText("Shopping Cart");
   }
 
-  async checkProductListCart (searchKey: string): Promise<void>{
+  async checkCartKeyWord (searchKey: string): Promise<void>{
     const productCount = await this.productName.count();
     for (let i=0; i<productCount; i++){
       const product = this.productName.nth(i);

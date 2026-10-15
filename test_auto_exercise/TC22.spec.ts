@@ -26,7 +26,8 @@ test.beforeEach(async ({ page }) => {
 });
  
 test('Test Case 22: Add to cart from Recommended items', async ({ page }) => { 
-   
+  let productName: string = "";
+  
   await test.step("Launch browser", async () => {
     await page.goto('https://automationexercise.com/');
     await expect(page).toHaveTitle(/Automation Exercise/);
@@ -41,7 +42,7 @@ test('Test Case 22: Add to cart from Recommended items', async ({ page }) => {
   });  
 
   await test.step("5. Click on 'Add To Cart' on Recommended product", async () => {   
-    await homePage.addRecommnedProduct(); 
+    productName = await homePage.addRecommnedProduct(); 
   });  
   
   await test.step("6. Click on 'View Cart' button", async () => {  
@@ -49,7 +50,7 @@ test('Test Case 22: Add to cart from Recommended items', async ({ page }) => {
   });  
     
   await test.step("7. Verify that product is displayed in cart page", async () => {  
-    
+    await cartPage.
   });  
 
 });
