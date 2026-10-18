@@ -78,6 +78,20 @@ export class CartPage extends BasePage {
     }
   }
 
+  async verifyCartContainProductName(keyword: string): Promise<void>{
+    // const productCount = await this.productName.count();
+    // let isFound = false;
+    // for (let i=0; i<productCount; i++){
+    //   let productNameText = await this.productName.nth(i).innerText();
+    //   console.log(i + ". " + productNameText);
+    //   if (productNameText.includes(keyword)) {
+    //     isFound = true;
+    //     break;
+    //   }
+    // }
+    // expect(isFound).toBe(true);
+    await expect(this.productName).toContainText(keyword);
+  }
 
   async deleteFirstProduct(): Promise<void> { 
     let deletedProductName = await this.productName.innerText(); 
@@ -95,5 +109,9 @@ export class CartPage extends BasePage {
   
   async verifyCartEmpty(): Promise<void> { 
     await expect(this.textCartEmpty).toContainText("Cart is empty!"); 
+  }
+ 
+  async verifyProductQuantity(qty: string): Promise<void> { 
+    await expect(this.productQty).toContainText(qty);  
   }
 }

@@ -16,6 +16,8 @@ export class CategoryPage extends BasePage {
   readonly btnSubCategoryTShirt: Locator;
   readonly btnSubCategoryJean: Locator;
   textBrand: Locator;
+  btnBrand: Locator;
+  textBrandName: Locator;
 
   constructor(page: Page) {
     super(page);  
@@ -24,6 +26,7 @@ export class CategoryPage extends BasePage {
      
     this.btnCategoryWomen = page.locator("//div[@class='panel-group category-products']//a[@href='#Women']");
     this.btnCategoryMen = page.locator("//div[@class='panel-group category-products']//a[@href='#Men']");
+
     this.btnSubCategoryDress = page.locator("//div[@class='panel-group category-products']//div[@id='Women']//li[1]/a");
     this.btnSubCategoryTops = page.locator("//div[@class='panel-group category-products']//div[@id='Women']//li[2]/a");
     this.btnSubCategorySaree = page.locator("//div[@class='panel-group category-products']//div[@id='Women']//li[3]/a");
@@ -31,6 +34,10 @@ export class CategoryPage extends BasePage {
     this.btnSubCategoryJean = page.locator("//div[@class='panel-group category-products']//div[@id='Men']//li[2]/a");
 
     this.textBrand = page.locator("//div[@class='brands_products']/h2");
+
+    this.btnBrand = page.locator("//ul[@class='nav nav-pills nav-stacked']/li");
+    this.textBrandName = page.locator("//ul[@class='nav nav-pills nav-stacked']/li/a");
+    
   }
 
 
@@ -54,6 +61,23 @@ export class CategoryPage extends BasePage {
     await this.btnCategoryMen.click();
   }
 
+
+  async clickRandBrand(): Promise<string> { 
+    let count = await this.btnBrand.count();
+    let randBrand: number = Math.floor(Math.random() * count);
+    let brandName: string = (await this.textBrandName.nth(randBrand).innerText()).split('\n')[1].trim();
+    console.log("brandName:", JSON.stringify(brandName));
+    // console.log( "name: " + brandName);
+    await this.btnBrand.nth(randBrand).click();
+    return brandName;
+  }
+
+  async verifyTitleContain(brand: string): Promise<void> { 
+    console.log( "brand: " + brand);
+    console.log( "titleCategory: " + await this.titleCategory.innerText());
+    await expect(this.titleCategory).toContainText(brand, {ignoreCase: true}); 
+  }
+
   async clickBtnSubCategoryWomen(subcategory: number):Promise<void> {  
     switch(subcategory) {
       case 1:
@@ -69,6 +93,7 @@ export class CategoryPage extends BasePage {
         break;
     } 
   }
+
 
   async verifyTitleCategoryWomen(subcategory: number): Promise<void> { 
     switch(subcategory) {

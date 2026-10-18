@@ -29,6 +29,7 @@ test.beforeEach(async ({ page }) => {
 test('Test Case 19: View & Cart Brand Products', async ({ page }) => {
   const randomSubCategoryWomen = Math.floor(Math.random() * 3) + 1;
   const randomSubCategoryMen = Math.floor(Math.random() * 2) + 1;
+  let brandName = "";
   
   await test.step("Launch browser", async () => {
     await page.goto('https://automationexercise.com/');
@@ -44,15 +45,19 @@ test('Test Case 19: View & Cart Brand Products', async ({ page }) => {
   });
 
   await test.step("5. Click on any brand name", async () => { 
+    brandName = await categoryPage.clickRandBrand();
   });
 
   await test.step("6. Verify that user is navigated to brand page and brand products are displayed", async () => { 
+    await categoryPage.verifyTitleContain(brandName);
   });
 
   await test.step("7. On left side bar, click on any other brand link", async () => { 
+    brandName = await categoryPage.clickRandBrand();
   });
 
   await test.step("8. Verify that user is navigated to that brand page and can see products", async () => { 
+    await categoryPage.verifyTitleContain(brandName);
   });
 
 

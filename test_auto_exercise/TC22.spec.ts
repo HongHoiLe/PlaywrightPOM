@@ -50,7 +50,7 @@ test('Test Case 22: Add to cart from Recommended items', async ({ page }) => {
   });  
     
   await test.step("7. Verify that product is displayed in cart page", async () => {  
-    await cartPage.
+    await cartPage.verifyCartContainProductName(productName);
   });  
 
 });

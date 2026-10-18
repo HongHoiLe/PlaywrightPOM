@@ -36,6 +36,7 @@ export class ProductPageDetail extends BasePage {
     this.productAvailability = page.locator("//div[@class='product-information']/p[2]");
     this.productCondition = page.locator("//div[@class='product-information']/p[3]");
     this.productBrand = page.locator("//div[@class='product-information']/p[4]");
+     
   }
 
 
@@ -43,13 +44,20 @@ export class ProductPageDetail extends BasePage {
   async goto(): Promise<void> {
     await this.navigate(this.url);
   }
+  
  
-
- 
+  async enterProductQuantity(qty: string): Promise<void> { 
+    await this.txtProductQty.clear();
+    await this.txtProductQty.fill(qty);
+  }
       
   // Button
   async clickBtnAddProduct(): Promise<void> { 
-    await this.productName.click();
+    await this.btnAddToCart.click();
+  }
+  
+  async clickBtnViewCart(): Promise<void> { 
+    await this.btnViewCart.click();
   }
   
   async verifyProductDetail(): Promise<void> { 

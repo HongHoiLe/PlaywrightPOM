@@ -86,7 +86,7 @@ test('Test Case 23: Verify address details in checkout page', async ({ page }) =
   });  
    
   await test.step("10. Verify that cart page is displayed", async () => {  
-    await cartPage.verifyCartDisplay("Shopping Cart");
+    await cartPage.verifyCartDisplay();
   });  
 
   await test.step("11. Click Proceed To Checkout", async () => {  

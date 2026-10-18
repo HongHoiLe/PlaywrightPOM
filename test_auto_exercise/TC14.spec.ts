@@ -64,7 +64,7 @@ test('TC14: Place Order: Register while Checkout', async ({ page }) => {
   }); 
 
   await test.step("6. Verify that cart page is displayed", async () => {
-    await cartPage.verifyCartDisplay("Shopping Cart");
+    await cartPage.verifyCartDisplay();
   });
 
   await test.step("7. Click Proceed To Checkout", async () => {

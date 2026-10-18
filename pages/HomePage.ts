@@ -56,7 +56,10 @@ export class HomePage extends BasePage {
     
     // Product
     this.btnViewCart = page.locator("//p[@class='text-center']//a[@href='/view_cart']");
-    this.btnAddFirstProduct = page.locator("(//a[@data-product-id='1'])[1]");
+    // this.btnAddFirstProduct = page.locator("(//a[@data-product-id='1'])[1]");
+    this.btnAddFirstProduct = page.locator("//div[@class='features_items']//div[@class='productinfo text-center']//a[@data-product-id='1']");
+    //div[@class='features_items']//div[@class='productinfo text-center']//p[text()='Blue Top']/following-sibling::a
+    
   } 
 
 
@@ -148,7 +151,7 @@ export class HomePage extends BasePage {
 
   async addRecommnedProduct(): Promise<string> {  
     let productName: string = await this.btnRecommnedProductName.nth(1).innerText();
-    console.log("Product name: " + productName); 
+    console.log("Recommend Product name: " + productName); 
     await this.btnAddRecommnedProduct.nth(1).click();
     return productName;
   }
