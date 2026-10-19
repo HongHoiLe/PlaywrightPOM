@@ -19,12 +19,12 @@ export abstract class BasePage {
     await this.page.waitForLoadState('domcontentloaded');
   }
 
-  async getUserName(): Promise<string> {
+  async createUser(userName: string, userJob: string): Promise<string> {
     const apiRequest = await request.newContext(); 
     const response = await apiRequest.post("https://reqres.in/api/users",{
       data:{
-        name: "Paul",
-        job: "musician"
+        name: userName,
+        job: userJob
       },
       headers:{
         'Content-Type': 'application/json',
@@ -32,7 +32,35 @@ export abstract class BasePage {
     });
 
     expect(response.status()).toBe(201);
-    const responseBody = await response.json();
-    return responseBody.name;
+    const responseBody = await response.json(); 
+    return responseBody.id;
+  }
+  
+  async getUserName(userId: string): Promise<string> {
+    const API_url = "https://reqres.in/api/users/"+userId;
+    console.log("API_url: "+API_url);
+    const apiRequest = await request.newContext(); 
+    const response = await apiRequest.get(API_url);
+    console.log("getUserName status:", response.status());
+
+    const responseBody = await response.json(); 
+    console.log(responseBody);
+    console.log(responseBody.data.first_name);
+
+    //expect(response.status()).toBe(200);
+    return responseBody.data.first_name;
+  }
+  
+  async deleteUser(userId: string): Promise<void> {
+    const API_url = "https://reqres.in/api/users/"+userId;
+    console.log("API_url: "+API_url);
+    const apiRequest = await request.newContext(); 
+    const response = await apiRequest.delete(API_url);
+ 
+    console.log("Delete status:", response.status()); 
+
+    // expect(response.status()).toBe(201);
+    // console.log(responseBody.data.first_name);
+    // return responseBody.data.first_name;
   }
 }

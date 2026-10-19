@@ -3,3 +3,8 @@ export interface ProductInfo {
     price: number;
     quantity: number;
 }
+
+export interface UserInfo {
+    name: string;
+    id: string; 
+}

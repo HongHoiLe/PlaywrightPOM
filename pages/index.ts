@@ -8,6 +8,7 @@ export { CartPage } from './CartPage';
 export { CheckoutPage } from './CheckoutPage';
 export { CategoryPage } from './CategoryPage';
 
+export { ProductInfo } from './Types'; 
 
 export { PlaywrightHomePage } from './PlaywrightHomePage';
 export { TodoPage } from './TodoPage'; 

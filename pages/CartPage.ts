@@ -1,6 +1,8 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
+import { ProductInfo } from './Types';
+
 export class CartPage extends BasePage {
   readonly url = 'https://automationexercise.com/';
   
@@ -67,15 +69,34 @@ export class CartPage extends BasePage {
    
   async getProductListCartInfo(): Promise<void>{
     const productCount = await this.productName.count();
-    for (let i=0; i<productCount; i++){
-      const productName = this.productName.nth(i);
-      console.log(i + ". " + productName.innerText);
+    console.log("getProductListCartInfo: ")
+    for (let i=0; i<productCount; i++){ 
+      console.log(i + ". " + await this.productName.nth(i).innerText());
  
       // const productPrice = this.productPrice.nth(i);
       // const productQty = this.productQty.nth(i);
       // const productTotalPrice = this.productTotalPrice.nth(i);
       // console.log(i + ". " + productName.innerText + " - " + productPrice.innerText + " - " + productQty.innerText + " - " + productTotalPrice.innerText); 
     }
+  }
+
+  async getProductListInfo(): Promise<ProductInfo[]>{
+    const productCount = await this.productName.count();
+    const productList: ProductInfo[] = [];
+    console.log("getProductListCartInfo: ") 
+
+    for (let i=0; i<productCount; i++){  
+      let name = await this.productName.nth(i).innerText();
+      let priceText = await this.productPrice.nth(i).innerText();
+      let price = Number(priceText.replace(/[^\d.]/g, ''));
+      productList.push({
+          name: name.trim(),
+          price: price,
+          quantity: 1
+      }); 
+    } 
+    console.log("productList: "+productList);
+    return productList;
   }
 
   async verifyCartContainProductName(keyword: string): Promise<void>{
@@ -114,4 +135,11 @@ export class CartPage extends BasePage {
   async verifyProductQuantity(qty: string): Promise<void> { 
     await expect(this.productQty).toContainText(qty);  
   }
+
+  
+  //////////////
+  async scrollToBottom(): Promise<void> {
+    await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  }
 }
+

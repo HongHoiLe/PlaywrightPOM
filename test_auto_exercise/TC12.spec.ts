@@ -5,6 +5,8 @@ import { ProductPage } from '../pages';
 import { CartPage } from '../pages';
 import { ProductPageDetail } from '../pages';
 
+import { ProductInfo } from '../pages';
+
 let homePage: HomePage;
 let registerPage: RegisterPage;
 let productPage: ProductPage;
@@ -17,7 +19,7 @@ test.beforeEach(async ({ page }) => {
   registerPage = new RegisterPage(page);
   productPage = new ProductPage(page);
   productPageDetail = new ProductPageDetail(page);
-    cartPage = new CartPage(page);
+  cartPage = new CartPage(page);
 
 });
  
@@ -26,6 +28,8 @@ test('Test Case 12: Add Products in Cart', async ({ page }) => {
   const searchKeyWord: string = "Green";
   const emailLogin: string = "khoalnv83@gmail.com";
   const passLogin: string = "123";
+
+  let toBeAddProducts: ProductInfo[] = [];
 
   await test.step("Launch browser", async () => {
     await page.goto('https://automationexercise.com/');
@@ -37,6 +41,8 @@ test('Test Case 12: Add Products in Cart', async ({ page }) => {
   });
 
   await test.step("5. Hover over first product and click 'Add to cart'", async () => {
+    let product = await productPage.addAnyProduct(0);
+    toBeAddProducts.push(product);
     await productPage.clickBtnAddFirstProduct(); 
   });
 
@@ -45,6 +51,8 @@ test('Test Case 12: Add Products in Cart', async ({ page }) => {
   });
      
   await test.step("7. Hover over second product and click 'Add to cart'", async () => {
+    let product = await productPage.addAnyProduct(1);
+    toBeAddProducts.push(product);
     await productPage.clickBtnAddSecondProduct(); 
   });
 
@@ -52,8 +60,9 @@ test('Test Case 12: Add Products in Cart', async ({ page }) => {
     await productPage.clickBtnViewCart();
   });  
    
-  await test.step("9. Verify both products are added to Cart", async () => { 
-    await cartPage.getProductListCartInfo();
+  await test.step("9. Verify both products are added to Cart", async () => {  
+    const cartProducts: ProductInfo[] = await cartPage.getProductListInfo();
+    expect(cartProducts).toEqual(toBeAddProducts);
   }); 
 
   // await test.step("10. Verify their prices, quantity and total price", async () => { 

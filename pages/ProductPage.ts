@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
-import { ProductInfo } from './types';
+import { ProductInfo } from './Types';
 
 export class ProductPage extends BasePage {
   readonly url = 'https://automationexercise.com/';
@@ -19,12 +19,19 @@ export class ProductPage extends BasePage {
   readonly currentProductsAddBtn: Locator; 
   readonly btnContinueShop: Locator; 
   readonly btnViewCart: Locator; 
+  productList: Locator;
+  productListName: Locator;
+  productListPrice: Locator;
 
   constructor(page: Page) {
     super(page);  
     this.btnAddFirstProduct = page.locator("//div[@class='productinfo text-center']//a[@data-product-id='1']");
     this.btnAddSecondProduct = page.locator("//div[@class='productinfo text-center']//a[@data-product-id='2']");
     this.btnViewFirstProduct = page.locator("//a[@href='/product_details/1']");
+    
+    this.productList = page.locator("//div[@class='productinfo text-center']//a");
+    this.productListName = page.locator("//div[@class='productinfo text-center']//p");
+    this.productListPrice = page.locator("//div[@class='productinfo text-center']//h2");
     
     this.titleTextCenter = page.locator("//h2[@class='title text-center']");
     this.txtSearch = page.locator("//input[@id='search_product']");
@@ -51,6 +58,19 @@ export class ProductPage extends BasePage {
 
   async clickBtnAddSecondProduct(): Promise<void> { 
     await this.btnAddSecondProduct.click();
+  }
+  
+  async addAnyProduct(index: number): Promise<ProductInfo> { 
+    const name = (await this.productListName.nth(index).innerText()).replace(/\s+/g, ' ').trim(); 
+    const priceText = await this.productListPrice.nth(index).innerText();
+    const price = Number(priceText.replace(/[^\d.]/g, '')); 
+    console.log("name: "+name, "||price: "+price);
+    // await this.productList.nth(index).click(); 
+    return {
+      name: name,
+      price: price,
+      quantity: 1
+    };
   }
 
   async clickBtnViewCart(): Promise<void> { 
@@ -102,6 +122,6 @@ export class ProductPage extends BasePage {
       await this.btnContinueShop.click();
     }
   }
-  
+   
 
 }

@@ -25,6 +25,9 @@ export class HomePage extends BasePage {
   btnRecommnedProductName: Locator;
   textRecommendProduct: Locator;
   btnViewCart: Locator;
+  txtSubEmail: Locator;
+  btnSubEmail: Locator;
+  successAlertSubEmail: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -44,7 +47,6 @@ export class HomePage extends BasePage {
     this.btnContinueShop = page.locator("//button[text()='Continue Shopping']");
     this.accDelText = page.locator("//h2[@data-qa='account-deleted']");
 
-    this.textSubcription = page.locator("//div[@class='single-widget']/h2");
     this.textTitleAuto = page.locator("(//h2[contains(text(),'Full-Fledged')])[1]");
     this.autoLogo = page.locator("//div[@class='logo pull-left']/a");
     this.btnScrollUpArrow = page.locator("//a[@id='scrollUp']");
@@ -59,6 +61,12 @@ export class HomePage extends BasePage {
     // this.btnAddFirstProduct = page.locator("(//a[@data-product-id='1'])[1]");
     this.btnAddFirstProduct = page.locator("//div[@class='features_items']//div[@class='productinfo text-center']//a[@data-product-id='1']");
     //div[@class='features_items']//div[@class='productinfo text-center']//p[text()='Blue Top']/following-sibling::a
+    
+    // Footer
+    this.textSubcription = page.locator("//div[@class='single-widget']/h2");
+    this.txtSubEmail = page.locator("//input[@id='susbscribe_email']");
+    this.btnSubEmail = page.locator("//button[@id='subscribe']");
+    this.successAlertSubEmail = page.locator("//div[@class='alert-success alert']");
     
   } 
 
@@ -159,6 +167,17 @@ export class HomePage extends BasePage {
   async clickBtnViewCart(): Promise<void> {
     await this.btnViewCart.click();
   }
+  
+  // ------------- Footer ------------- 
+  async addSubEmail(subEmail: string): Promise<void> {
+    await this.txtSubEmail.fill(subEmail);
+    await this.btnSubEmail.click();
+  }
+  
+  async verifySucessSubEmailMsg(): Promise<void>{
+    await expect(this.successAlertSubEmail).toHaveText("You have been successfully subscribed!");
+  }
+
 }
 
 
