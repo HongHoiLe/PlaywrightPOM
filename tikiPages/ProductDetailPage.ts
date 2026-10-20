@@ -28,6 +28,7 @@ export class ProductDetailPage extends BasePage {
     }
 
     async getPrice1tbOption(): Promise <number> {
+        await this.price1tbOption.waitFor({ state: 'visible', timeout: 3000 });
         return parseFloat(await this.price1tbOption.innerText());
     }
 

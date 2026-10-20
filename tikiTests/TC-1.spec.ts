@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Test case 1', () => {
-    test.only('Test case 1', async () => {
+    test('Test case 1', async () => {
         const item = "Iphone 18 promax";
 
         await test.step('Click vao button Close de tat quang cao', async() => {
@@ -38,28 +38,32 @@ test.describe('Test case 1', () => {
         await test.step('Click vao san pham dau tien trong ket qua tim kiem', async() => {
             await productPage.clickFirstProduct();
         });
-
-        await test.step('Click 1TB', async() => {
-            await productDetailPage.clickStorageFirstOption();
-        });
-
+        
         let priceBefore: number;
         let priceAfter: number;
-
+        
         await test.step('Verify gia san pham luc dau', async() => {
             priceBefore = await productDetailPage.getPrice1tbOption();
         });
 
-        await test.step('Chon mau do', async() => {
-            await productDetailPage.clickColorSecondOption();
+        await test.step('Click 1TB', async() => {
+            await productDetailPage.clickStorageFirstOption();
         });
 
         await test.step('Verify gia san pham luc sau', async() => {
             priceAfter = await productDetailPage.getPrice1tbOption();
         });
 
-        await test.step('So sanh gia san pham truoc va sau khi chon mau', async() => {
-            expect(priceBefore).toEqual(priceAfter);
+        // await test.step('Chon mau do', async() => {
+        //     await productDetailPage.clickColorSecondOption();
+        // });
+
+        // await test.step('Verify gia san pham luc sau', async() => {
+        //     priceAfter = await productDetailPage.getPrice1tbOption();
+        // });
+
+        await test.step('So sanh gia san pham truoc va sau', async() => {
+            expect(priceBefore).not.toEqual(priceAfter);
         });
 
         await test.step('Click button them vao gio hang', async() => {
