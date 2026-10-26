@@ -16,7 +16,7 @@ test('API ReqRes: create user', async ({ request }) => {
   console.log("userId: "+userId);
 
   let userName = await basePage.getUserName('12'); 
-  console.log("userName: "+userName);
+  console.log("- userName: "+userName);
 
   // await basePage.deleteUser('2');
 
