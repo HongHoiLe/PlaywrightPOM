@@ -12,14 +12,17 @@ import { RegisterPage } from '../pages';
  
 test('API ReqRes: create user', async ({ request }) => { 
   let basePage = new (class extends BasePage {})(null as any);
-  let userId = await basePage.createUser("Paul McCartney", "musician"); 
-  console.log("userId: "+userId);
+  let userId1 = await basePage.createUser("Paul McCartney", "musician");
+  console.log("1. Add new user:"); 
+  console.log("User added - userId1: "+userId1);
 
-  let userName = await basePage.getUserName('12'); 
-  console.log("- userName: "+userName);
+  let userName = await basePage.getUserName(userId1); 
+  console.log("2. Get userName of user "+userId1)
+  console.log("userName: "+userName);
 
   // await basePage.deleteUser('2');
 
+  await basePage.getUserNameAPI();
   // console.log(responseBody);
   // expect(responseBody.name).toBe("Paul");
   // expect(responseBody.job).toBe("musician");
