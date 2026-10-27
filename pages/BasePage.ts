@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Page, request } from '@playwright/test';
 
 export abstract class BasePage {
   protected page: Page;
@@ -17,5 +17,23 @@ export abstract class BasePage {
 
   async waitForPageLoad(): Promise<void> {
     await this.page.waitForLoadState('domcontentloaded');
+  }
+
+  async getUserName(): Promise<string> {
+    const apiRequest = await request.newContext();
+    const response = await apiRequest.post('https://reqres.in/api/users', {
+        data: {
+          name: 'morpheus2',
+          job: 'leader',
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    
+      expect(response.status()).toBe(201);
+    
+      const responseBody = await response.json();
+      return responseBody.name;
   }
 }

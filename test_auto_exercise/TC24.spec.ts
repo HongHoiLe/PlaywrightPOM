@@ -5,7 +5,7 @@ import { ProductPage } from '../pages';
 import { ProductPageDetail } from '../pages';
 import { CartPage } from '../pages';
 import { CheckoutPage } from '../pages';
-import fs from 'fs';
+import * as fs from 'fs';
 
 let homePage: HomePage;
 let registerPage: RegisterPage;
