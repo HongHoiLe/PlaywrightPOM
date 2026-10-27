@@ -34,11 +34,11 @@ test('TC8: Verify All Products and product detail page', async ({ page }) => {
   });
     
   await test.step("6. The products list is visible", async () => {
-    await productPage.checkTitleVisible();
+    await productPage.verifyTextCenterVisible();
   });
   
   await test.step("7. Click on 'View Product' of first product", async () => {
-    await productPage.clickbtnViewFirstProduct();
+    await productPage.clickBtnViewFirstProduct();
   });
 
   await test.step("9. Verify that detail detail is visible", async () => {

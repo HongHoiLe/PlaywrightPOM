@@ -1,22 +1,41 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
+import { ProductInfo } from './Types';
+
 export class CartPage extends BasePage {
   readonly url = 'https://automationexercise.com/';
   
   // Locators
   readonly btnProceedCheckOut: Locator; 
   readonly btnRegisterLogin: Locator; 
-  readonly ShoppingCartText: Locator; 
+  readonly shoppingCartText: Locator; 
  
+  readonly productName: Locator; 
+  readonly tableCart: Locator; 
+  readonly productPrice: Locator; 
+  readonly productQty: Locator; 
+  readonly productTotalPrice: Locator; 
+  btnDeleteProduct: Locator;
+  textCartEmpty: Locator;
 
   constructor(page: Page) {
     super(page);
     this.btnProceedCheckOut = page.locator("//a[@class='btn btn-default check_out']");
     this.btnRegisterLogin = page.locator("//a[@href='/login']//u");  
     
+    this.shoppingCartText = page.locator("//div[@class='breadcrumbs']//li[2]");  
+    this.tableCart = page.locator("//table[@class='table table-condensed']");   
     
-    this.ShoppingCartText = page.locator("//div[@class='breadcrumbs']//li[2]");  
+    this.productName = page.locator("//td[@class='cart_description']//a");  
+    this.productPrice = page.locator("//table[@class='table table-condensed']/tbody/tr/td[@class='cart_price']/p");   
+    this.productQty = page.locator("//table[@class='table table-condensed']/tbody/tr/td[@class='cart_quantity']/button");   
+    this.productTotalPrice = page.locator("//table[@class='table table-condensed']/tbody/tr/td[@class='cart_total']/p");   
+
+    
+    this.btnDeleteProduct = page.locator("//table[@class='table table-condensed']/tbody/tr/td[@class='cart_delete']/a");    
+    this.textCartEmpty = page.locator("//p[@class='text-center']//b");    
+		
   } 
 
 
@@ -34,7 +53,93 @@ export class CartPage extends BasePage {
   }
   
   
-  async verifyCartDisplay(keyword: string): Promise<void> { 
-    await expect(this.ShoppingCartText).toHaveText(keyword);
+  async verifyCartDisplay(): Promise<void> { 
+    await expect(this.shoppingCartText).toHaveText("Shopping Cart");
+  }
+
+  async checkCartKeyWord (searchKey: string): Promise<void>{
+    const productCount = await this.productName.count();
+    for (let i=0; i<productCount; i++){
+      const product = this.productName.nth(i);
+      console.log(i + ". " + product.innerText);
+      await expect(product).toContainText(searchKey);
+    }
+  }
+
+   
+  async getProductListCartInfo(): Promise<void>{
+    const productCount = await this.productName.count();
+    console.log("getProductListCartInfo: ")
+    for (let i=0; i<productCount; i++){ 
+      console.log(i + ". " + await this.productName.nth(i).innerText());
+ 
+      // const productPrice = this.productPrice.nth(i);
+      // const productQty = this.productQty.nth(i);
+      // const productTotalPrice = this.productTotalPrice.nth(i);
+      // console.log(i + ". " + productName.innerText + " - " + productPrice.innerText + " - " + productQty.innerText + " - " + productTotalPrice.innerText); 
+    }
+  }
+
+  async getProductListInfo(): Promise<ProductInfo[]>{
+    const productCount = await this.productName.count();
+    const productList: ProductInfo[] = [];
+    console.log("getProductListCartInfo: ") 
+
+    for (let i=0; i<productCount; i++){  
+      let name = await this.productName.nth(i).innerText();
+      let priceText = await this.productPrice.nth(i).innerText();
+      let price = Number(priceText.replace(/[^\d.]/g, ''));
+      productList.push({
+          name: name.trim(),
+          price: price,
+          quantity: 1
+      }); 
+    } 
+    console.log("productList: "+productList);
+    return productList;
+  }
+
+  async verifyCartContainProductName(keyword: string): Promise<void>{
+    // const productCount = await this.productName.count();
+    // let isFound = false;
+    // for (let i=0; i<productCount; i++){
+    //   let productNameText = await this.productName.nth(i).innerText();
+    //   console.log(i + ". " + productNameText);
+    //   if (productNameText.includes(keyword)) {
+    //     isFound = true;
+    //     break;
+    //   }
+    // }
+    // expect(isFound).toBe(true);
+    await expect(this.productName).toContainText(keyword);
+  }
+
+  async deleteFirstProduct(): Promise<void> { 
+    let deletedProductName = await this.productName.innerText(); 
+    let productCount = await this.productName.count();
+ 
+    await this.btnDeleteProduct.click();
+    // await expect(productName).toBeHidden();
+    for (let i=0; i<productCount; i++){
+      const productName = this.productName.nth(i);
+      console.log(i + ". " + productName.innerText);
+      await expect(this.productName).not.toHaveText(deletedProductName);
+    }
+  }
+  
+  
+  async verifyCartEmpty(): Promise<void> { 
+    await expect(this.textCartEmpty).toContainText("Cart is empty!"); 
+  }
+ 
+  async verifyProductQuantity(qty: string): Promise<void> { 
+    await expect(this.productQty).toContainText(qty);  
+  }
+
+  
+  //////////////
+  async scrollToBottom(): Promise<void> {
+    await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
   }
 }
+

@@ -18,12 +18,19 @@ export class CheckoutPage extends BasePage {
   readonly btnContinueAfterInvoice: Locator;
 
 
-  readonly textAddName: Locator;
-  readonly textAddName2: Locator;
+  readonly textUserName: Locator;
+  readonly textHomeAddress: Locator;
+  readonly textPostalAddress: Locator;
   readonly textCountry: Locator;
   readonly textPhone: Locator;
-  readonly txtOrderConfirm: Locator;
  
+  readonly textUserNameBilling: Locator;
+  readonly textHomeAddressBilling: Locator;
+  readonly textPostalAddressBilling: Locator;
+  readonly textCountryBilling: Locator;
+  readonly textPhoneBilling: Locator; 
+ 
+  readonly txtOrderConfirm: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -39,12 +46,20 @@ export class CheckoutPage extends BasePage {
     this.btnDownInvoice = page.locator("//a[@href='/download_invoice/500']");
     this.btnContinue = page.locator("//a[@class='btn btn-primary' and text()='Continue']");
  
-    this.textAddName = page.locator("//ul[@class='address item box']//li[@class='address_firstname address_lastname']");
-    this.textAddName2 = page.locator("//ul[@class='address item box']//li[@class='address_address1 address_address2'][2]");
+    this.textUserName = page.locator("//ul[@class='address item box']//li[@class='address_firstname address_lastname']");
+    this.textHomeAddress = page.locator("//ul[@class='address item box']//li[@class='address_address1 address_address2'][2]");
+    this.textPostalAddress = page.locator("//ul[@class='address item box']//li[@class='address_city address_state_name address_postcode']");
     this.textCountry = page.locator("//ul[@class='address item box']//li[@class='address_country_name']");
     this.textPhone = page.locator("//ul[@class='address item box']//li[@class='address_phone']");
 
-    this.btnDownInvoice = page.locator("//a[@href='/download_invoice/500']");  
+    this.textUserNameBilling = page.locator("//ul[@class='address alternate_item box']//li[@class='address_firstname address_lastname']");
+    this.textHomeAddressBilling = page.locator("//ul[@class='address alternate_item box']//li[@class='address_address1 address_address2'][2]");
+    this.textPostalAddressBilling = page.locator("//ul[@class='address alternate_item box']//li[@class='address_city address_state_name address_postcode']");
+    this.textCountryBilling = page.locator("//ul[@class='address alternate_item box']//li[@class='address_country_name']");
+    this.textPhoneBilling = page.locator("//ul[@class='address alternate_item box']//li[@class='address_phone']");
+
+    // this.btnDownInvoice = page.locator("//a[@href='/download_invoice/500']");  
+    this.btnDownInvoice = page.locator("//div[@class='col-sm-9 col-sm-offset-1']/a");  
     this.btnContinueAfterInvoice = page.locator("//a[@class='btn btn-primary' and text()='Continue']");  
     this.txtOrderConfirm = page.locator("//div[@class='col-sm-9 col-sm-offset-1']/p");  
      
@@ -57,7 +72,7 @@ export class CheckoutPage extends BasePage {
  
   // Button
   async enterTxtDescriptionComment(keyword: string): Promise<void> { 
-    //await this.txtDescriptionComment.waitFor({ state: 'visible' }); 
+    // await this.txtDescriptionComment.waitFor({ state: 'visible' }); 
     // console.log("Textarea count:", await this.page.locator("textarea").count());
     // console.log("Count:", await this.txtDescriptionComment.count());
     // console.log("Visible:", await this.txtDescriptionComment.isVisible()); 
@@ -102,11 +117,26 @@ export class CheckoutPage extends BasePage {
     await this.btnPaySumbmit.click();
   } 
 
+  async fillInPaymentDetail(txtNameCard: string, txtCardNumber: string, txtTxtCVC: string, txtExMonth: string, txtExYear: string): Promise<void> { 
+    await this.enterTxtNameCard(txtNameCard);
+    await this.enterTxtCardNumber(txtCardNumber);
+    await this.enterTxtCVC(txtTxtCVC);
+    await this.enterTxtExMonth(txtExMonth);
+    await this.enterTxtExYear(txtExYear); 
+  } 
+
   async verifyDeliveryAddress(fullName: string, address1: string, country: string, phone: string): Promise<void> { 
-    await expect(this.textAddName).toContainText(fullName);
-    await expect(this.textAddName2).toContainText(address1);
+    await expect(this.textUserName).toContainText(fullName);
+    await expect(this.textHomeAddress).toContainText(address1);
     await expect(this.textCountry).toContainText(country);
     await expect(this.textPhone).toContainText(phone);
+  } 
+  
+  async verifyDeliveryAddressBilling(fullName: string, address1: string, country: string, phone: string): Promise<void> { 
+    await expect(this.textUserNameBilling).toContainText(fullName);
+    await expect(this.textHomeAddressBilling).toContainText(address1);
+    await expect(this.textCountryBilling).toContainText(country);
+    await expect(this.textPhoneBilling).toContainText(phone);
   }
 
   async verifyOrderSuccess(text: string): Promise<void> { 
