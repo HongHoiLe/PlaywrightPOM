@@ -19,25 +19,6 @@ export abstract class BasePage {
     await this.page.waitForLoadState('domcontentloaded');
   }
 
-<<<<<<< HEAD
-  async getUserName(): Promise<string> {
-    const apiRequest = await request.newContext();
-    const response = await apiRequest.post('https://reqres.in/api/users', {
-        data: {
-          name: 'morpheus2',
-          job: 'leader',
-        },
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    
-      expect(response.status()).toBe(201);
-    
-      const responseBody = await response.json();
-      return responseBody.name;
-  }
-=======
   async createUser(userName: string, userJob: string): Promise<string> {
     const apiRequest = await request.newContext(); 
     const response = await apiRequest.post("https://reqres.in/api/users",{
@@ -121,7 +102,6 @@ export abstract class BasePage {
     return responseBody.id;
   }
 
->>>>>>> 2328635da1298faebaf6cb9e4095c31015f35f1d
 }
 
 
