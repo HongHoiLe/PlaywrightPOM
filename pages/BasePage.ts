@@ -41,13 +41,13 @@ export abstract class BasePage {
     console.log("API_url: "+API_url);
     const apiRequest = await request.newContext(); 
     const response = await apiRequest.get(API_url);
-    console.log("getUserName status:", response.status());
+    console.log("Status:", response.status());
 
     const responseBody = await response.json(); 
-    console.log(responseBody);
-    console.log(responseBody.data.first_name);
+    // console.log(responseBody);
+    // console.log(responseBody.data.first_name);
 
-    //expect(response.status()).toBe(200);
+    expect(response.status()).toBe(200);
     return responseBody.data.first_name;
   }
   

@@ -1,33 +1,34 @@
 import { test, expect } from '@playwright/test';
 import { BasePage, HomePage } from '../pages';
-import { RegisterPage } from '../pages';
- 
+import { RegisterPage } from '../pages'; 
 
+// https://reqres.in/
 
 // test.beforeEach(async ({ page }) => {  
 //   // await page.goto('https://automationexercise.com/');
 // });
-
-// https://reqres.in/
  
 test('API ReqRes: create user', async ({ request }) => { 
   let basePage = new (class extends BasePage {})(null as any);
-  let userId1 = await basePage.createUser("Paul McCartney", "musician");
-  console.log("1. Add new user:"); 
-  console.log("User added - userId1: "+userId1);
 
-  let userName = await basePage.getUserName(userId1); 
-  console.log("2. Get userName of user "+userId1)
-  console.log("userName: "+userName);
+  console.log("================================================");
+  let userId1 = "6";
+  let userName1 = await basePage.getUserName(userId1); 
+  console.log("Get userName of user "+userId1)
+  console.log("userName: "+userName1);
 
-  // await basePage.deleteUser('2');
+  await basePage.deleteUser(userId1);
+  console.log("================================================");
 
-  await basePage.getUserNameAPI();
-  // console.log(responseBody);
-  // expect(responseBody.name).toBe("Paul");
-  // expect(responseBody.job).toBe("musician");
-  // expect(responseBody.id).toBeTruthy();
-  // expect(responseBody.createdAt).toBeTruthy();
+  let userId2 = await basePage.createUser("Paul McCartney", "musician"); 
+  console.log("1. Add user - id: "+userId2);
+
+  let userName2 = await basePage.getUserName(userId2); 
+  console.log("2. Get userName of user "+userId2)
+  console.log("userName: "+userName2);
+
+  
+  
  
 });
  
