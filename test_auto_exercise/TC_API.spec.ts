@@ -11,21 +11,23 @@ import { RegisterPage } from '../pages';
 test('API ReqRes: create user', async ({ request }) => { 
   let basePage = new (class extends BasePage {})(null as any);
 
+  await basePage.getUserList();
   console.log("================================================");
-  let userId1 = "6";
+  let userId1 = "7";
   let userName1 = await basePage.getUserName(userId1); 
   console.log("Get userName of user "+userId1)
   console.log("userName: "+userName1);
 
-  await basePage.deleteUser(userId1);
+  // await basePage.deleteUser(userId1);
+
+
   console.log("================================================");
+  // let userId2 = await basePage.createUser("Paul McCartney", "musician"); 
+  // console.log("1. Add user - id: "+userId2);
 
-  let userId2 = await basePage.createUser("Paul McCartney", "musician"); 
-  console.log("1. Add user - id: "+userId2);
-
-  let userName2 = await basePage.getUserName(userId2); 
-  console.log("2. Get userName of user "+userId2)
-  console.log("userName: "+userName2);
+  // let userName2 = await basePage.getUserName(userId2); 
+  // console.log("2. Get userName of user "+userId2)
+  // console.log("userName2: "+userName2);
 
   
   

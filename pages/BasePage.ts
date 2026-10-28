@@ -36,6 +36,21 @@ export abstract class BasePage {
     return responseBody.id;
   }
   
+  async getUserList(): Promise<void> {
+    const API_url = "https://reqres.in/api/users?page=2";
+    console.log("API_url: "+API_url);
+    const apiRequest = await request.newContext(); 
+    const response = await apiRequest.get(API_url);
+    console.log("Status:", response.status());
+
+    const responseBody = await response.json(); 
+    console.log(responseBody);
+    // console.log(responseBody.data.first_name);
+
+    expect(response.status()).toBe(200);
+    // return responseBody.data.first_name;
+  }
+
   async getUserName(userId: string): Promise<string> {
     const API_url = "https://reqres.in/api/users/"+userId;
     console.log("API_url: "+API_url);

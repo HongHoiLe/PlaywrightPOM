@@ -16,7 +16,14 @@ export class HomePage extends BasePage {
   
   readonly productList: Locator; 
   readonly productPriceList: Locator; 
-
+  //////////////////////////////////////
+  readonly vehicleTab: Locator; 
+  xemayTab: Locator;
+  xemaygaTab: Locator;
+  // xemaygaList: Locator;
+  xemaygaListName: Locator;
+  xemaygaListPrice: Locator;
+  
   constructor(page: Page) {
     super(page);
     this.btnDelAd = page.locator("//img[@alt='close-icon']"); 
@@ -28,7 +35,15 @@ export class HomePage extends BasePage {
     this.btnFirstProductPrice = page.locator("(//div[@class='sc-2d0320b9-0 gHqeOl']//div[@class='price-discount__price'])[1]"); 
 
     this.productList = page.locator("//div[@class='sc-2d0320b9-0 gHqeOl']/div"); 
-    this.productPriceList = page.locator("//div[@class='sc-2d0320b9-0 gHqeOl']//div[@class='price-discount__price']"); 
+    this.productPriceList = page.locator("//div[@class='sc-2d0320b9-0 gHqeOl']//div[@class='price-discount__price']");
+
+    this.vehicleTab = page.locator("//a[@title='Ô Tô - Xe Máy - Xe Đạp']");
+    this.xemayTab = page.locator("//div[@class='sc-da08df93-3 gbXRzy']//div[text()='Xe máy']");
+    this.xemaygaTab = page.locator("//div[@class='sc-da08df93-3 gbXRzy']//div[text()='Xe tay ga']");
+    // this.xemaygaList = page.locator("//div[@class='sc-2d0320b9-0 gHqeOl']//a");
+    this.xemaygaListName = page.locator("//a[@data-view-id='product_list_item']//h3");
+    this.xemaygaListPrice = page.locator("//a[@data-view-id='product_list_item']//div[@class='price-discount__price']");
+   
   } 
  
   async goto(): Promise<void> {
@@ -36,6 +51,38 @@ export class HomePage extends BasePage {
   }
  
   // Button
+  
+  async clickVehicleTab(): Promise<void> { 
+    await this.vehicleTab.click();
+  }
+
+  async clickXeMayTab(): Promise<void> { 
+    await this.xemayTab.click();
+  }
+
+  async clickXeMayGaTab(): Promise<void> { 
+    await this.xemaygaTab.click();
+  }
+
+  async clickXeMayGaList(): Promise<void> { 
+    const productCount = await this.xemaygaListName.count();
+    console.log("getProductListCartInfo: ")
+    for (let i=0; i<productCount; i++){ 
+      console.log(i + ". " + await this.xemaygaListName.nth(i).innerText());
+      console.log(i + ". " + await this.xemaygaListPrice.nth(i).innerText());
+ 
+    }
+  }
+
+
+
+
+
+
+
+
+  
+
   async clickBtnDelAd(): Promise<void> { 
     await this.btnDelAd.click();
   }
