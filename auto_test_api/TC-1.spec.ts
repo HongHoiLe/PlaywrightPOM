@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.only('API: create, update, delete', async ({request}) => {
+test('API: create, update, delete', async ({request}) => {
     const response = await request.post('https://reqres.in/api/users', {
         data: {
             name: 'Đăng',
