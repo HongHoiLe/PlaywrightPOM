@@ -15,6 +15,10 @@ export class HomePage extends BasePage {
   readonly loginSuccesstxt: Locator;
   readonly signupLoginbtn: Locator;
   readonly deleteAccountBtn: Locator;
+  readonly categorySideBar: Locator;
+  readonly categoryWomen: Locator;
+  readonly subcriptionTxt: Locator;
+  readonly topText: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -28,14 +32,38 @@ export class HomePage extends BasePage {
     this.loginSuccesstxt = page.locator ("//a[contains(text(), 'Logged in as')]");
     this.signupLoginbtn = page.locator ("//a [@href = '/login']");
     this.deleteAccountBtn = page.locator ("//a [@href= '/delete_account']");
+    this.categorySideBar = page.locator ("//div [@class = 'panel-group category-products']");
+    this.categoryWomen = page.locator ("//h4 [@class = 'panel-title'] //a [@href = '#Women']");
+    this.subcriptionTxt = page.locator ("//div [@class = 'single-widget'] // h2");
+    this.topText = page.locator ("//div[contains(@class,'item') and contains(@class,'active')]//h2 [contains (text(), 'Fledged')]");
 }
 
   async goto(): Promise<void> {
     await this.navigate(this.url);
   }
 
+  async scrollToBottom(): Promise<void> {
+    await this.page.evaluate(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+    });
+  }
+
+  async scrollToTop(): Promise<void> {
+    await this.page.evaluate(() => {
+    window.scrollTo(0,0);
+    });
+  }
+
   async expectLogoHomePageVisible(): Promise<void> {
     await expect(this.logoHomePage).toBeVisible();
+  }
+
+  async expectCategorySideBarVisible(): Promise <void> {
+    await expect(this.categorySideBar).toBeVisible();
+  }
+
+  async expectTopTextVisible(): Promise <void> {
+    await expect(this.topText).toBeVisible();
   }
   
   async clickProductPagebtn(): Promise<void> {
@@ -43,6 +71,7 @@ export class HomePage extends BasePage {
   }
 
   async clickAddFirstProductToCartbtn(): Promise <void>{
+    await this.firstProduct.scrollIntoViewIfNeeded();
     await this.firstProduct.hover();
     await this.addFirstProductToCartbtn.click();
   }
@@ -52,6 +81,7 @@ export class HomePage extends BasePage {
   }
 
   async clickCartbtn(): Promise <void> {
+    await this.viewCartbtn.scrollIntoViewIfNeeded();
     await this.viewCartbtn.click();
   }
 
@@ -68,5 +98,18 @@ export class HomePage extends BasePage {
 
   async clickDeleteAccountbtn(): Promise <void> {
     await this.deleteAccountBtn.click();
+  }
+
+  async clickCategoryWomen(): Promise <void> {
+    await this.categoryWomen.click();
+  }
+
+  async clickSubCategoryWomen(categoryWomen: string): Promise <void> {
+    const subCategoryWomen = this.page.locator(`//div[@id='Women']//a[contains(text(), '${categoryWomen}')]`);
+    await subCategoryWomen.click();
+  }
+
+  async expectSubcriptionTxtcontains(): Promise <void> {
+    await expect(this.subcriptionTxt).toContainText('Subscription');
   }
 }
