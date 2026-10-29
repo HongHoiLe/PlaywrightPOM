@@ -60,14 +60,17 @@ export class HomePage extends BasePage {
   // Button
   
   async clickVehicleTab(): Promise<void> { 
+    await this.vehicleTab.waitFor({state:'visible', timeout:3000});
     await this.vehicleTab.click();
   }
 
   async clickXeMayTab(): Promise<void> { 
+    await this.xemayTab.waitFor({state:'visible', timeout:3000});
     await this.xemayTab.click();
   }
 
   async clickXeMayGaTab(): Promise<void> { 
+    await this.xemaygaTab.waitFor({state:'visible', timeout:3000});
     await this.xemaygaTab.click();
   }
 

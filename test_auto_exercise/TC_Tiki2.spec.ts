@@ -20,11 +20,12 @@ test('mua hang tiki 2', async ({ page }) => {
     await page.goto('https://tiki.vn/'); 
   }); 
 
-  // await test.step("2. Click vao button Close de tat quang cao", async () => {
-  //   await homePage.clickBtnDelAd();
-  // }); 
+  await test.step("2. Click vao button Close de tat quang cao", async () => {
+    await homePage.clickBtnDelAd();
+  }); 
 
   await test.step("2. Click vào menu ô tô - xe máy - xe đạp", async () => {
+    //await page.pause();
     await homePage.clickVehicleTab();
   }); 
   
