@@ -20,9 +20,11 @@ export class HomePage extends BasePage {
   readonly vehicleTab: Locator; 
   xemayTab: Locator;
   xemaygaTab: Locator;
-  // xemaygaList: Locator;
+  xemaygaList: Locator;
   xemaygaListName: Locator;
   xemaygaListPrice: Locator;
+  sorter: Locator;
+  sortByPriceMinMax: Locator;
   
   constructor(page: Page) {
     super(page);
@@ -40,9 +42,14 @@ export class HomePage extends BasePage {
     this.vehicleTab = page.locator("//a[@title='Ô Tô - Xe Máy - Xe Đạp']");
     this.xemayTab = page.locator("//div[@class='sc-da08df93-3 gbXRzy']//div[text()='Xe máy']");
     this.xemaygaTab = page.locator("//div[@class='sc-da08df93-3 gbXRzy']//div[text()='Xe tay ga']");
-    // this.xemaygaList = page.locator("//div[@class='sc-2d0320b9-0 gHqeOl']//a");
+    
+    this.xemaygaList = page.locator("//a[@data-view-id='product_list_item']");
     this.xemaygaListName = page.locator("//a[@data-view-id='product_list_item']//h3");
     this.xemaygaListPrice = page.locator("//a[@data-view-id='product_list_item']//div[@class='price-discount__price']");
+    
+    
+    this.sorter = page.locator("//div[@class='sc-169acb76-2 keUrBT']");
+    this.sortByPriceMinMax = page.locator("//div[text()='Giá thấp đến cao']");
    
   } 
  
@@ -64,19 +71,33 @@ export class HomePage extends BasePage {
     await this.xemaygaTab.click();
   }
 
-  async clickXeMayGaList(): Promise<void> { 
+  async showXeMayGaList(): Promise<void> { 
     const productCount = await this.xemaygaListName.count();
-    console.log("getProductListCartInfo: ")
-    for (let i=0; i<productCount; i++){ 
-      console.log(i + ". " + await this.xemaygaListName.nth(i).innerText());
-      console.log(i + ". " + await this.xemaygaListPrice.nth(i).innerText());
- 
+    console.log("getProductListCartInfo | Total: "+productCount)
+    for (let i=1; i<productCount; i++){  
+      console.log(i + ". Price: " + await this.xemaygaListPrice.nth(i).innerText() + " |Name: "+ await this.xemaygaListName.nth(i).innerText());   
     }
+  }
+
+  async showXeMayGaListAllInfo(): Promise<void> { 
+    // const productCount = await this.xemaygaList.count();
+    // console.log("getProductListCartInfo: ")
+    // for (let i=1; i<productCount; i++){  
+    //   console.log(i + ". " + await this.xemaygaList.nth(i).allInnerTexts());   
+    // }
+    console.log("Count:", await this.xemaygaList.count());  
+    console.log(
+        "Texts:",
+        await this.xemaygaList.allInnerTexts()
+    );
   }
 
 
 
-
+  async sortByPrice(): Promise<void> { 
+    await this.sorter.click();
+    await this.sortByPriceMinMax.click();
+  }
 
 
 

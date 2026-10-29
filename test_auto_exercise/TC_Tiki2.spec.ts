@@ -32,15 +32,21 @@ test('mua hang tiki 2', async ({ page }) => {
     await homePage.clickXeMayTab();
   }); 
 
-  await test.step("4. Click chọn xe tay ga", async () => {
+  await test.step("4. Click chọn xe tay ga", async () => { 
     await homePage.clickXeMayGaTab();
   }); 
  
   
-  await test.step("5. Get text tên mẫu xe và giá của tất cả các sản phẩm sau đó in ra màn hình", async () => {
-    //allInnerTexts()
+  await test.step("5. Get text tên mẫu xe và giá của tất cả các sản phẩm sau đó in ra màn hình", async () => { 
+    await homePage.showXeMayGaList();
   }); 
 
+  await test.step("6. Sap xep san pham theo Gia tu be den lon", async () => { 
+    console.log("\n==========================================================================")
+    console.log("Sort by Price:")
+    await homePage.sortByPrice();
+    await homePage.showXeMayGaList();
+  }); 
 });
 
  // 
