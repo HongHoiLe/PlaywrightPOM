@@ -17,6 +17,8 @@ export abstract class BasePage {
 
   async waitForPageLoad(): Promise<void> {
     await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForLoadState('networkidle');
+    await this.page.locator("//button[@id='login']").waitFor({ state: 'visible', timeout: 5000 });
   }
 
   async createUser(userName: string, userJob: string): Promise<string> {
