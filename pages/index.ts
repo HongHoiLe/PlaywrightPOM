@@ -10,3 +10,5 @@ export {DetailProductPage} from './DetailProductPage'
 export {CartPage} from './CartPage'
 export {PaymentPage} from './PaymentPage'
 export {CheckoutPage} from './CheckoutPage'
+
+export {TikiHomePage} from './TikiHomePage'
