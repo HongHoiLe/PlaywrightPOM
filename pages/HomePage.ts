@@ -2,11 +2,12 @@ import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class HomePage extends BasePage {
-    readonly url = 'http://automationexercise.com';
+    readonly url = 'https://www.automationexercise.com';
     
     // Locators
   readonly homePagebtn: Locator;
   readonly productPagebtn: Locator;
+  readonly testCasesPagebtn: Locator;
   readonly logoHomePage: Locator; 
   readonly addFirstProductToCartbtn: Locator;
   readonly firstProduct: Locator;
@@ -14,6 +15,7 @@ export class HomePage extends BasePage {
   readonly viewCartbtn: Locator;
   readonly loginSuccesstxt: Locator;
   readonly signupLoginbtn: Locator;
+  readonly logoutBtn: Locator;
   readonly deleteAccountBtn: Locator;
   readonly categorySideBar: Locator;
   readonly categoryWomen: Locator;
@@ -24,6 +26,7 @@ export class HomePage extends BasePage {
     super(page);
     this.homePagebtn = page.locator("//i[@class='fa fa-home']");
     this.productPagebtn = page.locator("//a[@href='/products']");
+    this.testCasesPagebtn = page.locator("//ul[contains(@class,'nav')]/descendant::a[@href='/test_cases']");
     this.logoHomePage = page.locator("//img[@src='/static/images/home/logo.png']");
     this.addFirstProductToCartbtn = page.locator("//div[@class='product-overlay']//a[@class='btn btn-default add-to-cart' and @data-product-id = '1']");
     this.firstProduct = page.locator ("//div [@class = 'features_items'] //div[@class='productinfo text-center'] //p[text()='Blue Top']");
@@ -31,7 +34,8 @@ export class HomePage extends BasePage {
     this.viewCartbtn = page.locator ("//ul [@class = 'nav navbar-nav'] //a [@href = '/view_cart']");
     this.loginSuccesstxt = page.locator ("//a[contains(text(), 'Logged in as')]");
     this.signupLoginbtn = page.locator ("//a [@href = '/login']");
-    this.deleteAccountBtn = page.locator ("//a [@href= '/delete_account']");
+    this.logoutBtn = page.locator("//a[@href='/logout']");
+    this.deleteAccountBtn = page.locator("//a [@href= '/delete_account']");
     this.categorySideBar = page.locator ("//div [@class = 'panel-group category-products']");
     this.categoryWomen = page.locator ("//h4 [@class = 'panel-title'] //a [@href = '#Women']");
     this.subcriptionTxt = page.locator ("//div [@class = 'single-widget'] // h2");
@@ -70,6 +74,10 @@ export class HomePage extends BasePage {
     await this.productPagebtn.click();
   }
 
+  async clickTestCasesPagebtn(): Promise<void> {
+    await this.testCasesPagebtn.click();
+  }
+
   async clickAddFirstProductToCartbtn(): Promise <void>{
     await this.firstProduct.scrollIntoViewIfNeeded();
     await this.firstProduct.hover();
@@ -94,6 +102,10 @@ export class HomePage extends BasePage {
 
   async clickSignupLoginbtn(): Promise <void> {
     await this.signupLoginbtn.click();
+  }
+
+  async clickLogoutbtn(): Promise<void> {
+    await this.logoutBtn.click();
   }
 
   async clickDeleteAccountbtn(): Promise <void> {

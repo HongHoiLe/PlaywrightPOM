@@ -1,0 +1,197 @@
+- generic [aria-hidden] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e5]:
+      - link [ref=e245] [cursor=pointer]:
+        - /url: /
+      - list [ref=e12]:
+        - listitem [ref=e13]:
+          - link [ref=e247] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e15]: 
+            - text: Home
+        - listitem [ref=e16]:
+          - link [ref=e248] [cursor=pointer]:
+            - /url: /products
+            - generic [ref=e18]: 
+            - text: Products
+        - listitem [ref=e19]:
+          - link [ref=e249] [cursor=pointer]:
+            - /url: /view_cart
+            - generic [ref=e21]: 
+            - text: Cart
+        - listitem [ref=e22]:
+          - link [ref=e250] [cursor=pointer]:
+            - /url: /login
+            - generic [ref=e24]: 
+            - text: Signup / Login
+        - listitem [ref=e25]:
+          - link [ref=e251] [cursor=pointer]:
+            - /url: /test_cases
+            - generic [ref=e27]: 
+            - text: Test Cases
+        - listitem [ref=e28]:
+          - link [ref=e252] [cursor=pointer]:
+            - /url: /api_list
+            - generic [ref=e30]: 
+            - text: API Testing
+        - listitem [ref=e31]:
+          - link [ref=e253] [cursor=pointer]:
+            - /url: https://www.youtube.com/c/AutomationExercise
+            - generic [ref=e33]: 
+            - text: Video Tutorials
+        - listitem [ref=e34]:
+          - link [ref=e254] [cursor=pointer]:
+            - /url: /contact_us
+            - generic [ref=e36]: 
+            - text: Contact us
+  - generic [ref=e38]:
+    - heading [level=2] [ref=e255]: Test Cases
+    - generic [ref=e42]:
+      - heading [level=5] [ref=e256]: "Below is the list of test Cases for you to practice the Automation. Click on the scenario for detailed Test Steps:"
+      - heading [level=4] [ref=e257]:
+        - link [ref=e258] [cursor=pointer]:
+          - /url: "#collapse1"
+          - text: "Test Case 1: Register User"
+    - heading [level=4] [ref=e259]:
+      - link [ref=e260] [cursor=pointer]:
+        - /url: "#collapse2"
+        - text: "Test Case 2: Login User with correct email and password"
+    - heading [level=4] [ref=e261]:
+      - link [ref=e262] [cursor=pointer]:
+        - /url: "#collapse3"
+        - text: "Test Case 3: Login User with incorrect email and password"
+    - heading [level=4] [ref=e263]:
+      - link [ref=e264] [cursor=pointer]:
+        - /url: "#collapse4"
+        - text: "Test Case 4: Logout User"
+    - heading [level=4] [ref=e265]:
+      - link [ref=e266] [cursor=pointer]:
+        - /url: "#collapse5"
+        - text: "Test Case 5: Register User with existing email"
+    - heading [level=4] [ref=e267]:
+      - link [ref=e268] [cursor=pointer]:
+        - /url: "#collapse6"
+        - text: "Test Case 6: Contact Us Form"
+    - heading [level=4] [ref=e269]:
+      - link [ref=e270] [cursor=pointer]:
+        - /url: "#collapse7"
+        - text: "Test Case 7: Verify Test Cases Page"
+    - heading [level=4] [ref=e271]:
+      - link [ref=e272] [cursor=pointer]:
+        - /url: "#collapse8"
+        - text: "Test Case 8: Verify All Products and product detail page"
+    - heading [level=4] [ref=e273]:
+      - link [ref=e274] [cursor=pointer]:
+        - /url: "#collapse9"
+        - text: "Test Case 9: Search Product"
+    - heading [level=4] [ref=e275]:
+      - link [ref=e276] [cursor=pointer]:
+        - /url: "#collapse10"
+        - text: "Test Case 10: Verify Subscription in home page"
+    - heading [level=4] [ref=e277]:
+      - link [ref=e278] [cursor=pointer]:
+        - /url: "#collapse11"
+        - text: "Test Case 11: Verify Subscription in Cart page"
+    - heading [level=4] [ref=e279]:
+      - link [ref=e280] [cursor=pointer]:
+        - /url: "#collapse12"
+        - text: "Test Case 12: Add Products in Cart"
+    - heading [level=4] [ref=e281]:
+      - link [ref=e282] [cursor=pointer]:
+        - /url: "#collapse13"
+        - text: "Test Case 13: Verify Product quantity in Cart"
+    - heading [level=4] [ref=e283]:
+      - link [ref=e284] [cursor=pointer]:
+        - /url: "#collapse14"
+        - text: "Test Case 14: Place Order: Register while Checkout"
+    - heading [level=4] [ref=e285]:
+      - link [ref=e286] [cursor=pointer]:
+        - /url: "#collapse15"
+        - text: "Test Case 15: Place Order: Register before Checkout"
+    - heading [level=4] [ref=e287]:
+      - link [ref=e288] [cursor=pointer]:
+        - /url: "#collapse16"
+        - text: "Test Case 16: Place Order: Login before Checkout"
+    - heading [level=4] [ref=e289]:
+      - link [ref=e290] [cursor=pointer]:
+        - /url: "#collapse17"
+        - text: "Test Case 17: Remove Products From Cart"
+    - heading [level=4] [ref=e291]:
+      - link [ref=e292] [cursor=pointer]:
+        - /url: "#collapse18"
+        - text: "Test Case 18: View Category Products"
+    - heading [level=4] [ref=e293]:
+      - link [ref=e294] [cursor=pointer]:
+        - /url: "#collapse19"
+        - text: "Test Case 19: View & Cart Brand Products"
+    - heading [level=4] [ref=e295]:
+      - link [ref=e296] [cursor=pointer]:
+        - /url: "#collapse20"
+        - text: "Test Case 20: Search Products and Verify Cart After Login"
+    - heading [level=4] [ref=e297]:
+      - link [ref=e298] [cursor=pointer]:
+        - /url: "#collapse21"
+        - text: "Test Case 21: Add review on product"
+    - heading [level=4] [ref=e299]:
+      - link [ref=e300] [cursor=pointer]:
+        - /url: "#collapse22"
+        - text: "Test Case 22: Add to cart from Recommended items"
+    - heading [level=4] [ref=e301]:
+      - link [ref=e302] [cursor=pointer]:
+        - /url: "#collapse23"
+        - text: "Test Case 23: Verify address details in checkout page"
+    - heading [level=4] [ref=e303]:
+      - link [ref=e304] [cursor=pointer]:
+        - /url: "#collapse24"
+        - text: "Test Case 24: Download Invoice after purchase order"
+    - heading [level=4] [ref=e305]:
+      - link [ref=e306] [cursor=pointer]:
+        - /url: "#collapse25"
+        - text: "Test Case 25: Verify Scroll Up using 'Arrow' button and Scroll Down functionality"
+    - heading [level=4] [ref=e307]:
+      - link [ref=e308] [cursor=pointer]:
+        - /url: "#collapse26"
+        - text: "Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functionality"
+    - generic [ref=e174]:
+      - heading [level=4] [ref=e309]:
+        - link [ref=e310] [cursor=pointer]:
+          - /url: "#feedback"
+          - text: Feedback for Us
+      - list [ref=e179]:
+        - listitem [ref=e180]: We have identified above scenarios and added in the list.
+        - listitem [ref=e181]: You can explore more test cases in the website and if you find new test scenario that is not covered in above list, do let us know. We will definitely add that in above list.
+        - listitem [ref=e182]:
+          - text: If you think, this website should cover up any particular feature, kindly share with us at
+          - link [ref=e311] [cursor=pointer]:
+            - /url: mailto:feedback@automationexercise.com
+            - text: feedback@automationexercise.com
+          - text: . We will work on that part. Your feedback matters a lot.
+  - insertion [ref=e185]:
+    - generic [ref=e188]:
+      - heading [level=2] [ref=e312]: Discover more
+      - link [ref=e313] [cursor=pointer]:
+        - generic [ref=e314]: Test Case Templates
+      - link [ref=e315] [cursor=pointer]:
+        - generic [ref=e316]: Software Testing Courses
+      - link [ref=e317] [cursor=pointer]:
+        - generic [ref=e318]: Automation Testing Tools
+  - contentinfo [ref=e206]:
+    - generic [ref=e211]:
+      - heading [level=2] [ref=e319]: Subscription
+      - generic [ref=e213]:
+        - textbox [ref=e320]:
+          - /placeholder: Your email address
+        - button [ref=e321] [cursor=pointer]:
+          - generic [ref=e216]: 
+        - paragraph [ref=e217]: Get the most recent updates from our site and be updated your self...
+    - paragraph [ref=e221]: Copyright © 2021 All rights reserved
+  - text: 
+  - insertion [ref=e223]:
+    - generic [ref=e226]:
+      - heading [level=2] [ref=e322]: Discover more
+      - link [ref=e323] [cursor=pointer]:
+        - generic [ref=e324]: Automation Training Services
+      - link [ref=e325] [cursor=pointer]:
+        - generic [ref=e326]: Scenario Testing Guides
+      - link [ref=e327] [cursor=pointer]:
+        - generic [ref=e328]: UI Testing Software

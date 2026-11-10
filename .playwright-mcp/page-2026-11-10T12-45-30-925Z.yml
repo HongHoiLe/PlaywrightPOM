@@ -1,0 +1,74 @@
+- generic [active] [ref=f66e1]:
+  - banner [ref=f66e2]:
+    - generic [ref=f66e5]:
+      - link [ref=f66e8] [cursor=pointer]:
+        - /url: /
+        - img "Automation Exercise website" [ref=f66e9]
+      - list [ref=f66e12]:
+        - listitem [ref=f66e13]:
+          - link " Home" [ref=f66e14] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f66e15]: 
+            - text: Home
+        - listitem [ref=f66e16]:
+          - link " Products" [ref=f66e17] [cursor=pointer]:
+            - /url: /products
+            - generic [ref=f66e18]: 
+            - text: Products
+        - listitem [ref=f66e19]:
+          - link " Cart" [ref=f66e20] [cursor=pointer]:
+            - /url: /view_cart
+            - generic [ref=f66e21]: 
+            - text: Cart
+        - listitem [ref=f66e22]:
+          - link " Signup / Login" [ref=f66e23] [cursor=pointer]:
+            - /url: /login
+            - generic [ref=f66e24]: 
+            - text: Signup / Login
+        - listitem [ref=f66e25]:
+          - link " Test Cases" [ref=f66e26] [cursor=pointer]:
+            - /url: /test_cases
+            - generic [ref=f66e27]: 
+            - text: Test Cases
+        - listitem [ref=f66e28]:
+          - link " API Testing" [ref=f66e29] [cursor=pointer]:
+            - /url: /api_list
+            - generic [ref=f66e30]: 
+            - text: API Testing
+        - listitem [ref=f66e31]:
+          - link " Video Tutorials" [ref=f66e32] [cursor=pointer]:
+            - /url: https://www.youtube.com/c/AutomationExercise
+            - generic [ref=f66e33]: 
+            - text: Video Tutorials
+        - listitem [ref=f66e34]:
+          - link " Contact us" [ref=f66e35] [cursor=pointer]:
+            - /url: /contact_us
+            - generic [ref=f66e36]: 
+            - text: Contact us
+  - generic [ref=f66e40]:
+    - heading "Account Created!" [level=2] [ref=f66e41]
+    - paragraph [ref=f66e42]:
+      - text: Congratulations! Your new account has been successfully created!
+      - link "Get Writing Tools" [ref=f66e43] [cursor=pointer]
+    - paragraph [ref=f66e47]:
+      - text: You can now take advantage of member privileges to enhance your online
+      - link "shopping" [ref=f66e48] [cursor=pointer]:
+        - /url: "#"
+      - text: experience with us.
+    - link "Continue" [ref=f66e52] [cursor=pointer]:
+      - /url: /
+  - contentinfo [ref=f66e53]:
+    - generic [ref=f66e58]:
+      - heading "Subscription" [level=2] [ref=f66e59]
+      - generic [ref=f66e60]:
+        - textbox "Your email address" [ref=f66e61]
+        - button "" [ref=f66e62] [cursor=pointer]
+        - paragraph [ref=f66e64]: Get the most recent updates from our site and be updated your self...
+    - paragraph [ref=f66e68]: Copyright © 2021 All rights reserved
+  - text: 
+  - insertion [ref=f66e70]:
+    - generic [ref=f66e73]:
+      - heading "These are topics related to the article that might interest you" [level=2] [ref=f66e75]: Discover more
+      - link "Automation testing tools" [ref=f66e76] [cursor=pointer]
+      - link "Automation tutorials" [ref=f66e81] [cursor=pointer]
+      - link "API testing services" [ref=f66e86] [cursor=pointer]
