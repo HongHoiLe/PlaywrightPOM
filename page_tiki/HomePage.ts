@@ -95,7 +95,24 @@ export class HomePage extends BasePage {
     );
   }
 
+  async getAllProduct(): Promise<void> { 
+    let productList: {name: string; price: number} [] = [];
 
+    let productNames = await this.xemaygaListName.allInnerTexts();
+    let productPrices = await this.xemaygaListPrice.allInnerTexts();
+    
+    for(let i=0; i<productNames.length; i++){
+      productList.push({
+        name: productNames[i],
+        price: Number(productPrices[i].replace(/\D/g,''))
+      });
+    }
+    productList.sort((a,b) => b.price - a.price);
+    for(let i=0; i<productNames.length; i++){
+      console.log("Price: "+productList[i].price+" |Name: "+productList[i].name);
+    }
+
+  }
 
   async sortByPrice(): Promise<void> { 
     await this.sorter.click();
